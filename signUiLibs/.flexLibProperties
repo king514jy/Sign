@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="signUi.SignUiCore"/>
+    <classEntry path="signUi.tools.CameraGroup"/>
+    <classEntry path="signUi.core.ActionBase"/>
+    <classEntry path="signUi.tools.SignBoard"/>
+    <classEntry path="signUi.tools.SignHandle"/>
+    <classEntry path="signUi.events.SignEvent"/>
+    <classEntry path="signUi.SignShowUICore"/>
+    <classEntry path="signUi.mode.SetDevicesMode"/>
+    <classEntry path="signUi.mode.SetDirectionMode"/>
+    <classEntry path="signUi.mode.SetTerminalMode"/>
+    <classEntry path="signUi.mode.SetRoleMode"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

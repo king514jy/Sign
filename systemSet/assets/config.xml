@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<!-- 设置设备数量，若只签到机一台(num=1)，其它设置则不读取，num=2读取设置。
+		direction签到机在大屏显示端的哪个方向(上下左右内嵌，通过UI库枚举值设定) 
+		terminal为是显示端还是操作端(display/operate)
+		role为是客户端还是服务端client/server-->
+	<devices num="1" direction="bottom" terminal="operate" role="client"/>
+	<!-- 模板编码(按模板的制造顺序依次编码) -->
+	<template coding="0" />
+	<server ip="192.168.1.102"/>
+</data>
