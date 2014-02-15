@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>systemSetUI</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.flashbridge.flashprobuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.flashbridge.flashpronature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] gs收费最新</name>
+			<type>2</type>
+			<location>/Users/Humberger/Documents/myflash/第三方库/greensock-as3/gs收费最新</location>
+		</link>
+		<link>
+			<name>[source path] myclass</name>
+			<type>2</type>
+			<location>/Users/Humberger/Documents/myflash/myclass</location>
+		</link>
+	</linkedResources>
+</projectDescription>

@@ -20,6 +20,15 @@ package
 		 * 保存设置
 		 */
 		public static const SAVE_SYSTEM_SET:String = "save_system_set";
+		/**
+		 * 启动主程序
+		 */
+		public static const START_MAIN:String = "start_main";
+		/**
+		 * 启动服务器
+		 */
+		public static const START_SERVERSOCKET:String = "start_serversocket";
+		
 		public static var instance:SystemFacade;
 		public function SystemFacade()
 		{

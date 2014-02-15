@@ -15,6 +15,13 @@
 		public static const NAME:String="ConfigProxy";
 		private var xmlHead:String = '<?xml version="1.0" encoding="utf-8" ?>';
 		private var isSet:Boolean;
+		public var devices:String;
+		public var direction:String;
+		public var terminal:String;
+		public var role:String;
+		public var coding:String;
+		public var ip:String;
+		public var password:String;
 		public function ConfigProxy(data:Object=null)
 		{
 			super(NAME,data);
@@ -39,16 +46,30 @@
 		{
 			var urlLoader:URLLoader = e.target as URLLoader;
 			var xml:XML = XML(urlLoader.data);
-			var obj:Object = new Object();
-			obj.devices = xml.devices.@num;
-			obj.direction = xml.devices.@direction;
-			obj.terminal = xml.devices.@terminal;
-			obj.role = xml.devices.@role;
-			obj.coding = xml.template.@coding;
-			obj.ip = xml.server.@ip;
-			obj.password = xml.password.@p;
+			devices = xml.devices.@num;
+			direction = xml.devices.@direction;
+			terminal = xml.devices.@terminal;
+			role = xml.devices.@role;
+			coding = xml.template.@coding;
+			ip = xml.server.@ip;
+			password = xml.password.@p;
 			if(isSet)
+			{
+				var obj:Object = new Object();
+				obj.devices = devices;
+				obj.direction = direction;
+				obj.terminal = terminal;
+				obj.role = role;
+				obj.coding = coding;
+				obj.ip = ip;
+				obj.password = password;
 				this.sendNotification(SystemFacade.OPEN_SYSTEM_SET,obj,"new_setting");
+			}
+			else
+			{
+				//启动
+				this.sendNotification(SystemFacade.START_MAIN);
+			}
 		}
 		public function saveConfig(obj:Object):void
 		{

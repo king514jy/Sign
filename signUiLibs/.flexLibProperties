@@ -12,6 +12,7 @@
     <classEntry path="signUi.mode.SetDirectionMode"/>
     <classEntry path="signUi.mode.SetTerminalMode"/>
     <classEntry path="signUi.mode.SetRoleMode"/>
+    <classEntry path="signUi.mode.NetWorkEventMode"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
