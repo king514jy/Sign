@@ -15,6 +15,8 @@
 		public static const NAME:String="ConfigProxy";
 		private var xmlHead:String = '<?xml version="1.0" encoding="utf-8" ?>';
 		private var isSet:Boolean;
+		public var projectName:String;
+		public var projectPath:String;
 		public var devices:String;
 		public var direction:String;
 		public var terminal:String;
@@ -29,16 +31,18 @@
 		public function loadConfig(isSet:Boolean):void
 		{
 			this.isSet = isSet;
-			var file:File = File.applicationStorageDirectory.resolvePath("config.xml");
+			var file:File = File.applicationStorageDirectory.resolvePath("assets/");
+			var fileSelf:File = File.applicationDirectory.resolvePath("assets/");
 			if(!file.exists)
 			{
+				fileSelf.copyTo(file);
 				//初始设置
 				this.sendNotification(SystemFacade.OPEN_SYSTEM_SET,null,"inital");
 			}
 			else
 			{
 				var urlLoader:URLLoader = new URLLoader();
-				urlLoader.load(new URLRequest(file.url));
+				urlLoader.load(new URLRequest(file.url+"/config.xml"));
 				urlLoader.addEventListener(Event.COMPLETE,complete);
 			}
 		}
@@ -46,6 +50,8 @@
 		{
 			var urlLoader:URLLoader = e.target as URLLoader;
 			var xml:XML = XML(urlLoader.data);
+			projectName = xml.project.@name;
+			projectPath = xml.project.@path;
 			devices = xml.devices.@num;
 			direction = xml.devices.@direction;
 			terminal = xml.devices.@terminal;
@@ -56,6 +62,8 @@
 			if(isSet)
 			{
 				var obj:Object = new Object();
+				obj.projectName = projectName;
+				obj.projectPath = projectPath;
 				obj.devices = devices;
 				obj.direction = direction;
 				obj.terminal = terminal;
@@ -74,10 +82,12 @@
 		public function saveConfig(obj:Object):void
 		{
 			var xml:XML = <data></data>
+			var projectXML:XML = <project path={obj.projectPath} name={obj.projectName} />
 			var devicesXML:XML = <devices num={obj.devices} direction={obj.direction} terminal={obj.terminal} role={obj.role}/>
 			var templateXML:XML = <template coding={obj.coding} />
 			var serverXML:XML = <server ip={obj.ip} />
 			var passwordXML:XML = <password p={obj.password} />
+			xml.appendChild(projectXML);
 			xml.appendChild(devicesXML);
 			xml.appendChild(templateXML);
 			xml.appendChild(serverXML);
@@ -85,7 +95,7 @@
 			var xmlStr:String = xml.toString();
 			var pattern:RegExp =  /\n/g;
 			xmlStr = xmlStr.replace(pattern, "\r\n");
-			var file:File = File.applicationStorageDirectory.resolvePath("config.xml");
+			var file:File = File.applicationStorageDirectory.resolvePath("assets/config.xml");
 			var fileStream:FileStream = new FileStream();
 			fileStream.open(file, FileMode.WRITE);
 			fileStream.writeUTFBytes(String(xmlHead + "\r\n" + xmlStr));

@@ -20,9 +20,9 @@
 			var mc:MovieClip = e.currentTarget as MovieClip;
 			var id:int = btnList.indexOf(mc);
 			if(id == 0)
-				goto = 3;
+				goto = 4;
 			else
-				goto = 1;
+				goto = 2;
 			dispatchEvent(new Event("goto"));
 		}
 	}

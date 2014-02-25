@@ -2,10 +2,9 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
     <classEntry path="signUi.SignUiCore"/>
-    <classEntry path="signUi.tools.CameraGroup"/>
-    <classEntry path="signUi.core.ActionBase"/>
-    <classEntry path="signUi.tools.SignBoard"/>
-    <classEntry path="signUi.tools.SignHandle"/>
+    <classEntry path="signUi.core.IAction"/>
+    <classEntry path="signUi.display.SignBoard"/>
+    <classEntry path="signUi.utils.SignHandle"/>
     <classEntry path="signUi.events.SignEvent"/>
     <classEntry path="signUi.SignShowUICore"/>
     <classEntry path="signUi.mode.SetDevicesMode"/>
@@ -13,6 +12,17 @@
     <classEntry path="signUi.mode.SetTerminalMode"/>
     <classEntry path="signUi.mode.SetRoleMode"/>
     <classEntry path="signUi.mode.NetWorkEventMode"/>
+    <classEntry path="signUi.display.WaitNumberAnimation"/>
+    <classEntry path="signUi.events.AnimationEvent"/>
+    <classEntry path="signUi.net.SocketNetWork"/>
+    <classEntry path="signUi.controller.GestureSportController"/>
+    <classEntry path="signUi.events.StatusEvent"/>
+    <classEntry path="signUi.controller.BoundaryWallsController"/>
+    <classEntry path="signUi.mode.ModuleRequestMode"/>
+    <classEntry path="signUi.mode.ModuleEventMode"/>
+    <classEntry path="signUi.display.PicBox"/>
+    <classEntry path="signUi.mode.FolderNameMode"/>
+    <classEntry path="signUi.core.IPicBox"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

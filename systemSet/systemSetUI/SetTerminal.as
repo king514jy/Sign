@@ -16,7 +16,7 @@
 		override protected function clickHandle(e:MouseEvent):void
 		{
 			super.clickHandle(e);
-			goto = 3;
+			goto = 4;
 			dispatchEvent(new Event("goto"));
 		}
 

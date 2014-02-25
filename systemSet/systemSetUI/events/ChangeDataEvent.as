@@ -1,4 +1,4 @@
-package systemSetUI.events 
+﻿package systemSetUI.events 
 {
 	import flash.events.Event;
 	
@@ -12,6 +12,7 @@ package systemSetUI.events
 		public static const CHANGE_NUMBER:String = "change_number";
 		public static const CHANGE_STRING:String = "change_string";
 		public static const SELECT_FILE:String = "select_file";
+		public static const SELECT_FOLDER:String = "select_folder";
 		public static const INPUT:String = "input";
 		public static const CHANGE_BEGIN:String = "change_begin";
 		public static const CHANGE_OVER:String = "change_over";

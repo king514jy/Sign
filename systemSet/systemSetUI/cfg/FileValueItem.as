@@ -1,4 +1,4 @@
-package systemSetUI.cfg 
+﻿package systemSetUI.cfg 
 {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -20,6 +20,7 @@ package systemSetUI.cfg
 		private var _value:String;
 		private var _extension:String;
 		private var _tips:String;
+		private var _showName:String;
 		public function FileValueItem() 
 		{
 			nameTxt = this.getChildByName("name_txt") as TextField;
@@ -34,6 +35,7 @@ package systemSetUI.cfg
 		public function get tips():String { return _tips; }
 		public function get extension():String { return _extension; }
 		public function get label():String{ return nameTxt.text; }
+		public function get showName():String{ return _showName; }
 		private function mouseDown(e:MouseEvent):void
 		{
 			addBtn.gotoAndStop(2);
@@ -46,6 +48,7 @@ package systemSetUI.cfg
 		{
 			nameTxt.text = name;
 			pathTxt.text = value;
+			_showName = name;
 			_value = value;
 			_tips = tips;
 			_extension = extension;

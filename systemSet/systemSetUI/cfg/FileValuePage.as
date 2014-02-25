@@ -1,4 +1,4 @@
-package systemSetUI.cfg 
+﻿package systemSetUI.cfg 
 {
 	/**
 	 * ...
@@ -71,7 +71,7 @@ package systemSetUI.cfg
 		{
 			for (var i:int = 0; i < le; i++ )
 			{
-				var n:String = itemList[i].name;
+				var n:String = itemList[i].showName;
 				var t:String = itemList[i].tips;
 				var e:String = itemList[i].extension;
 				var v:String = itemList[i].value;

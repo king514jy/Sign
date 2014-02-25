@@ -1,4 +1,4 @@
-﻿package signUi.tools
+﻿package signUi.display
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -10,9 +10,9 @@
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
-	import signUi.core.ActionBase;
+	import signUi.core.IAction;
 	
-	public class SignBoard extends ActionBase
+	public class SignBoard extends Sprite implements IAction
 	{
 		private var brush:Sprite;
 		private var brushClass:Class;
@@ -71,12 +71,12 @@
 			undoStack = new Vector.<BitmapData>();
 		}
 		public function get content():BitmapData{ return bmd; }
-		override public function startAction():void 
+		public function startAction():void 
 		{
 			addEventListener(MouseEvent.MOUSE_DOWN, mouseDown);
 			addEventListener(MouseEvent.MOUSE_UP, mouseUp);
 		}
-		override public function stopAction():void
+		public function stopAction():void
 		{
 			if (hasEventListener(MouseEvent.MOUSE_DOWN))
 			{
@@ -84,7 +84,7 @@
 				removeEventListener(MouseEvent.MOUSE_UP, mouseUp);
 			}
 		}
-		override public function setAction():void
+		public function setAction():void
 		{
 			removeChild(bm);
 			bmd.dispose();
@@ -96,7 +96,7 @@
 			bm.smoothing = true;
 			addChild(bm);
 		}
-		override public function replyAction():void 
+		public function replyAction():void 
 		{
 			undo();
 		}

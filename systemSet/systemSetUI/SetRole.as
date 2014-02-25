@@ -18,9 +18,9 @@
 			super.clickHandle(e);
 			var mc:MovieClip = e.currentTarget as MovieClip;
 			if(mc == btnList[1])
-				goto = 4;
-			else
 				goto = 5;
+			else
+				goto = 6;
 			dispatchEvent(new Event("goto"));
 		}
 	}

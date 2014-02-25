@@ -2,6 +2,9 @@ package model
 {
 	import flash.events.ProgressEvent;
 	import flash.events.ServerSocketConnectEvent;
+	import flash.filesystem.File;
+	import flash.filesystem.FileStream;
+	import flash.filesystem.FileMode;
 	import flash.net.ServerSocket;
 	import flash.net.Socket;
 	import flash.utils.ByteArray;
@@ -11,11 +14,15 @@ package model
 	import org.puremvc.as3.interfaces.IProxy;
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
+	import signUi.mode.NetWorkEventMode;
+	
 	public class ServerSocketProxy extends Proxy implements IProxy
 	{
 		public static const NAME:String = "ServerSocketProxy";
 		private var serverSocket:ServerSocket;
 		private var clientList:Vector.<ClientGroup>;
+		private var jcount:int;
+		private var tcount:int
 		public function ServerSocketProxy(data:Object=null)
 		{
 			super(NAME, data);
@@ -32,7 +39,7 @@ package model
 				}
 			}
 			serverSocket = new ServerSocket();
-			serverSocket.bind(2014);
+			serverSocket.bind(2013);
 			serverSocket.addEventListener( ServerSocketConnectEvent.CONNECT, onConnect );
 			serverSocket.listen();
 		}
@@ -43,6 +50,7 @@ package model
 			group.socket = client;
 			clientList.push(group);
 			client.addEventListener(ProgressEvent.SOCKET_DATA,onClientSocketData)
+			trace("有人进来")
 		}
 		private function onClientSocketData( e:ProgressEvent ):void
 		{
@@ -83,7 +91,22 @@ package model
 		}  
 		private function readMsg(obj:Object):void
 		{
-			
+			if(obj.type==NetWorkEventMode.PICTURE_TRANSPORT)
+			{
+				trace("接收图片"+jcount);
+				jcount++
+				var picFile:File = File.documentsDirectory.resolvePath("sign/"+obj.picID+".jpg");
+				var picByt:ByteArray = obj.byt;
+				var picFs:FileStream = new FileStream();
+				picFs.open(picFile,FileMode.WRITE);
+				picFs.writeBytes(picByt);
+				picFs.close();
+			}
+			if(obj.type==NetWorkEventMode.PICTURE_SEPARATE)
+			{
+				trace("脱离控制"+tcount);
+				tcount++;
+			}
 		}
 		public function closeSocket():void
 		{

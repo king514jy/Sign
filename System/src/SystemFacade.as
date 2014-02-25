@@ -28,7 +28,38 @@ package
 		 * 启动服务器
 		 */
 		public static const START_SERVERSOCKET:String = "start_serversocket";
-		
+		/**
+		 * 启动socket
+		 */
+		public static const START_SOCKET:String = "start_socket";
+		/**
+		 * 解析模块请求
+		 */
+		public static const ANALYZE_REQUEST:String = "analyze_request";
+		/**
+		 * 解析模块事件
+		 */
+		public static const ANALYZE_EVENT:String = "analyze_event";
+		/**
+		 * 打开摄像头
+		 */
+		public static const OPEN_CAMERA:String = "open_camera";
+		/**
+		 * 拍照
+		 */
+		public static const PHOTOGRAPH:String = "photograph";
+		/**
+		 * 保存图片
+		 */
+		public static const SAVE_PIC:String = "save_pic";
+		/**
+		 * 发送图片
+		 */
+		public static const SEND_PIC:String = "send_pic";
+		/**
+		 * 关闭app;
+		 */
+		public static const CLOSE_APP:String = "close_app";
 		public static var instance:SystemFacade;
 		public function SystemFacade()
 		{

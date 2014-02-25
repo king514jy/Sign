@@ -20,7 +20,7 @@
 		private var nextBtn:SimpleButton;
 		private var selectBtn:SimpleButton;
 		private var codingList:Vector.<String>;
-		private var hasConfigList:Vector.<String>;
+		private var hasConfigList:Vector.<Boolean>;
 		private var folder:String;
 		private var status:String = "next";
 		private var count:int;
@@ -33,7 +33,7 @@
 			selectBtn = this.getChildByName("select_btn") as SimpleButton;
 			this.mask = mask_mc;
 			codingList = new Vector.<String>();
-			hasConfigList = new Vector.<String>();
+			hasConfigList = new Vector.<Boolean>();
 			nextBtn.addEventListener(MouseEvent.CLICK,clickChange);
 			preBtn.addEventListener(MouseEvent.CLICK,clickChange);
 			selectBtn.addEventListener(MouseEvent.CLICK,selectTemplate);
@@ -66,7 +66,7 @@
 			for(var i:int=0;i<le;i++)
 			{
 				codingList.push(xml.template[i].@coding);
-				hasConfigList.push(xml.template[i].@config);
+				hasConfigList.push(xml.template[i].@config=="true");
 			}
 			urlLoader.removeEventListener(Event.COMPLETE,loadComplete);
 			urlLoader = null;
@@ -139,7 +139,10 @@
 		private function selectTemplate(e:MouseEvent):void
 		{
 			value = codingList[count];
-			goto = 999;
+			if(hasConfigList[count])
+				goto = 7;
+			else
+				goto = 999;
 			dispatchEvent(new Event("goto"));
 		}
 		override public function setValue(str:String):void

@@ -1,10 +1,14 @@
-package view
+﻿package view
 {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.display.Stage;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
+	import flash.net.FileFilter;
 	
 	import org.gestouch.events.GestureEvent;
 	import org.gestouch.gestures.LongPressGesture;
@@ -13,8 +17,12 @@ package view
 	
 	import systemSetUI.InputPassword;
 	import systemSetUI.OpenTips;
+	import systemSetUI.SetProject;
 	import systemSetUI.SetUIPage;
 	import systemSetUI.assets.CloseData;
+	import systemSetUI.cfg.FileValueItem;
+	import systemSetUI.cfg.SetModlueConfig;
+	import systemSetUI.events.ChangeDataEvent;
 	import systemSetUI.events.InputPasswordEvent;
 	import systemSetUI.events.SystemSetEvent;
 	
@@ -23,6 +31,7 @@ package view
 	public class SystemSetMe extends Mediator implements IMediator
 	{
 		public static const NAME:String = "SystemSetMe";
+		private var xmlHead:String = '<?xml version="1.0" encoding="utf-8" ?>';
 		private var setPage:SetUIPage;
 		private var inputPassword:InputPassword;
 		private var password:String;
@@ -33,6 +42,8 @@ package view
 		private var openTips:OpenTips;
 		private var closeSpr:Sprite;
 		private var thisGroup:Sprite;
+		private var fileItem:FileValueItem; 
+		private var setProject:SetProject;
 		public function SystemSetMe(viewComponent:Object=null)
 		{
 			super(NAME,viewComponent);
@@ -108,12 +119,18 @@ package view
 			inputPassword.x = 1024 * 0.5;
 			inputPassword.y = 768 * 0.5;
 			thisGroup.addChild(inputPassword);
-			var signleURL:String = File.applicationDirectory.resolvePath("assets/template_signle_config.xml").url;
-			var multiURL:String = File.applicationDirectory.resolvePath("assets/template_multi_config.xml").url;
+			var signleURL:String = File.applicationStorageDirectory.resolvePath("assets/template_signle_config.xml").url;
+			var multiURL:String = File.applicationStorageDirectory.resolvePath("assets/template_multi_config.xml").url;
 			setPage = new SetUIPage(signleURL,multiURL);
+			setPage.storageDirectory = File.applicationStorageDirectory.url;
 			setPage.addEventListener(SystemSetEvent.SET_COMPLETE,setComplete);
+			setPage.addEventListener(ChangeDataEvent.SAVE_CONFIG,saveConfig,true);
+			setPage.addEventListener(ChangeDataEvent.SELECT_FILE,selectFile,true);
+			setPage.addEventListener(ChangeDataEvent.SELECT_FOLDER,selectFolder,true);
 			if(!isInitial)
 			{
+				setPage.projectName = obj.projectName;
+				setPage.projectPath = obj.projectPath;
 				setPage.devices = obj.devices;
 				setPage.direction = obj.direction;
 				setPage.terminal = obj.terminal;
@@ -147,10 +164,12 @@ package view
 			clearInputPassword();
 			thisGroup.addChildAt(setPage,0);
 		}
-		private function setComplete(e:SystemSetEvent):void
+		private function setComplete(e:SystemSetEvent=null):void
 		{
 			setPage.parent.removeChild(setPage);
 			var obj:Object = new Object();
+			obj.projectName = setPage.projectName;
+			obj.projectPath = setPage.projectPath;
 			obj.devices = setPage.devices;
 			obj.direction = setPage.direction;
 			obj.terminal = setPage.terminal;
@@ -205,8 +224,48 @@ package view
 			{
 				thisGroup.removeChild(setPage);
 				setPage.removeEventListener(SystemSetEvent.SET_COMPLETE,setComplete);
+				setPage.removeEventListener(ChangeDataEvent.SAVE_CONFIG,saveConfig,true);
+				setPage.removeEventListener(ChangeDataEvent.SELECT_FILE,selectFile,true);
 				setPage = null;
 			}
+		}
+		private function saveConfig(e:ChangeDataEvent):void
+		{
+			var setMode:SetModlueConfig = e.target as SetModlueConfig;
+			var xml:XML = setMode.getConfig();
+			var xmlStr:String = xml.toString();
+			var pattern:RegExp =  /\n/g;
+			xmlStr = xmlStr.replace(pattern, "\r\n");
+			var file:File = new File(setMode.configAddress);
+			var fileStream:FileStream = new FileStream();
+			fileStream.open(file, FileMode.WRITE);
+			fileStream.writeUTFBytes(String(xmlHead + "\r\n" + xmlStr));
+			fileStream.close();
+			setComplete();
+		}
+		private function selectFile(e:ChangeDataEvent):void
+		{
+			fileItem = e.target as FileValueItem;
+			var file:File = File.desktopDirectory;
+			file.browseForOpen(fileItem.tips,[new FileFilter("文件",fileItem.extension)]);
+			file.addEventListener(Event.SELECT,setFile);
+		}
+		private function setFile(e:Event):void
+		{
+			var file:File = e.target as File;
+			fileItem.value = file.url;
+		}
+		private function selectFolder(e:ChangeDataEvent):void
+		{
+			setProject = e.target as SetProject;
+			var file:File = File.desktopDirectory;
+			file.browseForDirectory("选择图片保存目录");
+			file.addEventListener(Event.SELECT,setFolder);
+		}
+		private function setFolder(e:Event):void
+		{
+			var file:File = e.target as File;
+			setProject.projectPath = file.nativePath;
 		}
 	}
 }

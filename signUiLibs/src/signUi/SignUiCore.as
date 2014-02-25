@@ -2,16 +2,26 @@ package signUi
 {
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import flash.media.Camera;
 	
 	public class SignUiCore extends Sprite
 	{
-		protected var _pic:BitmapData;
+		public var requestList:Vector.<String>;
+		public var eventList:Vector.<String>;
 		public function SignUiCore()
+		{
+			requestList = new Vector.<String>();
+			eventList = new Vector.<String>();
+		}
+		public function init(stageW:Number,stageH:Number,direction:String="up",ip:String=null):void
 		{
 			
 		}
-		public function get pic():BitmapData{ return _pic; }
-		public function init():void
+		public function injectCamera(camera:Camera):void
+		{
+			
+		}
+		public function injectCameraPic(bmpDa:BitmapData):void
 		{
 			
 		}

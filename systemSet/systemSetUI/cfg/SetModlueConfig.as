@@ -1,4 +1,4 @@
-package systemSetUI.cfg
+﻿package systemSetUI.cfg
 {
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
@@ -8,8 +8,9 @@ package systemSetUI.cfg
 	import flash.net.URLRequest;
 	
 	import systemSetUI.events.ChangeDataEvent;
+	import systemSetUI.SetBase;
 	
-	public class SetModlueConfig extends Sprite
+	public class SetModlueConfig extends SetBase
 	{
 		private var pageList:Vector.<ValueModlueBase>;
 		private var numberPage:NumberValuePage;
@@ -24,9 +25,9 @@ package systemSetUI.cfg
 		{
 			pageList = new Vector.<ValueModlueBase>();
 			pageXList = new Vector.<Number>();
-			pageXList.push(33,529,33,529);
+			pageXList.push(-480,18,-480,18);
 			pageYList = new Vector.<Number>();
-			pageYList.push(100,100,388,388);
+			pageYList.push(-282,-282,0,0);
 			saveBtn = this.getChildByName("save_btn") as SimpleButton;
 			saveBtn.addEventListener(MouseEvent.CLICK,saveConfig);
 		}

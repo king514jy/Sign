@@ -1,4 +1,4 @@
-package systemSetUI.cfg
+﻿package systemSetUI.cfg
 {
 	import com.greensock.TweenLite;
 	
@@ -24,6 +24,8 @@ package systemSetUI.cfg
 		{
 			itemList = new Vector.<InputValueItem>();
 			inputBack = new Sprite();
+			inputBack.x = -512;
+			inputBack.y = -384;
 			inputBack.graphics.beginFill(0,0.6);
 			inputBack.graphics.drawRect(0,0,1024,768);
 			inputBack.graphics.endFill();
@@ -101,11 +103,12 @@ package systemSetUI.cfg
 			container = this.parent;
 			container.addChild(inputBack);
 			imeUI = new ImeUI();
-			imeUI.y = 198;
+			imeUI.y = -182;
+			imeUI.x = -512;
 			container.addChild(imeUI);
 			temporaryGroup = new TemporaryInputGroup();
-			temporaryGroup.x = 164;
-			temporaryGroup.y = 8;
+			temporaryGroup.x = -348;
+			temporaryGroup.y = -373;
 			container.addChild(temporaryGroup);
 			temporaryGroup.add(nowItem.value);
 			imeUI.addEventListener(ImeEvent.INPUT,imeEvent);

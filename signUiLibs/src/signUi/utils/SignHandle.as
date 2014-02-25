@@ -1,5 +1,6 @@
-package signUi.tools
+package signUi.utils
 {
+	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.events.EventDispatcher;
 	import flash.geom.Point;
@@ -108,5 +109,36 @@ package signUi.tools
 			rect.bottom = bottomPoint.y;
 			return rect;
 		}
+		public static function handleSign(source:Bitmap,perfectWidth:Number,perfectHeight:Number,priorityHeight:Boolean=true):void
+		{
+			var h:Number = source.height;
+			var w:Number = source.width;
+			var s:Number = 0;
+			if(priorityHeight)
+			{
+				s = perfectHeight/h;
+				source.height = perfectHeight;
+				source.width = w * s;
+				if(source.width > perfectWidth)
+				{
+					source.width = perfectWidth;
+					s = perfectWidth/w;
+					source.height = h * s;
+				}
+			}
+			else
+			{
+				source.width = perfectWidth;
+				s = perfectWidth/w;
+				source.height = h * s;
+				if(source.height>perfectHeight)
+				{
+					s = perfectHeight/h;
+					source.height = perfectHeight;
+					source.width = w * s;
+				}
+			}
+		}
+			
 	}
 }

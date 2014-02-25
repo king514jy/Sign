@@ -7,6 +7,9 @@
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
 	import systemSetUI.events.SystemSetEvent;
+	import systemSetUI.cfg.SetModlueConfig;
+	import signUi.mode.SetDevicesMode;
+	import signUi.mode.SetRoleMode;
 	
 	public class SetUIPage extends Sprite
 	{
@@ -14,6 +17,7 @@
 		private var endX:uint = 512;
 		private var startX:uint = 630;
 		private var closeX:uint = 395;
+		private var setProject:SetProject;
 		private var setDevices:SetDevices;
 		private var setDirection:SetDirection;
 		private var setTerminal:SetTerminal;
@@ -24,18 +28,22 @@
 		private var oldIDList:Vector.<int>;
 		private var backBtn:SimpleButton;
 		private var templateCfgList:Vector.<String>;
+		private var setConfig:SetModlueConfig;
+		public var storageDirectory:String;
 		public function SetUIPage(signle:String,multi:String)
 		{
 			templateCfgList = new Vector.<String>();
 			templateCfgList.push(signle,multi);
 			queueList = new Vector.<SetBase>();
+			setProject = new SetProject();
 			setDevices = new SetDevices();
 			setDirection = new SetDirection();
 			setTerminal = new SetTerminal();
 			setRole = new SetRole();
 			setIP = new SetIP();
 			setTemplate = new SetTemplate();
-			queueList.push(setDevices,setDirection,setTerminal,setRole,setIP,setTemplate);
+			setConfig = new SetModlueConfig();
+			queueList.push(setProject,setDevices,setDirection,setTerminal,setRole,setIP,setTemplate,setConfig);
 			for each(var sb:SetBase in queueList)
 			{
 				sb.addEventListener("goto",changeUI);
@@ -45,6 +53,10 @@
 			oldIDList = new Vector.<int>();
 			openUI(queueList[0]);
 		}
+		public function set projectName(str:String):void{ setProject.projectName = str;}
+		public function get projectName():String{ return setProject.projectName; }
+		public function set projectPath(str:String):void{ setProject.projectPath = str; }
+		public function get projectPath():String{ return setProject.projectPath;}
 		public function set devices(str:String):void{ setDevices.setValue(str); }
 		public function get devices():String{ return setDevices.value; }
 		public function set direction(str:String):void{ setDirection.setValue(str); }
@@ -87,9 +99,27 @@
 			var sb:SetBase = e.target as SetBase;
 			if(sb.goto!=999)
 			{
-				if(sb.goto==5)
+				if(sb.goto==6)
 				{
 					setTemplate.comfigAddress = templateCfgList[int(setDevices.value)-1];
+				}
+				if(sb.goto==7)
+				{
+					if(setDevices.value == SetDevicesMode.SIGNLE)
+					{
+						
+					}
+					else
+					{
+						if(setRole.value == SetRoleMode.CLIENT)
+						{
+							setConfig.configAddress = storageDirectory+"assets/template/multi/"+setTemplate.value+"/signUI/config.xml";
+						}
+						else
+						{
+							setConfig.configAddress = storageDirectory+"assets/template/multi/"+setTemplate.value+"/signShowUI/config.xml";
+						}
+					}
 				}
 				openUI(queueList[sb.goto]);
 				closeUI();
