@@ -17,7 +17,7 @@ package model
 		}
 		public function savePic(obj:Object,path:String):void
 		{
-			var picFile:File = new File(path+"/"+obj.folderName+"/"+obj.picID+".jpg");
+			var picFile:File = new File(path+"/"+obj.folderName+"/"+obj.id+".jpg");
 			var picByt:ByteArray = obj.byt;
 			var picFs:FileStream = new FileStream();
 			picFs.open(picFile,FileMode.WRITE);

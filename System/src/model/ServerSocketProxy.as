@@ -95,7 +95,7 @@ package model
 			{
 				trace("接收图片"+jcount);
 				jcount++
-				var picFile:File = File.documentsDirectory.resolvePath("sign/"+obj.picID+".jpg");
+				var picFile:File = File.documentsDirectory.resolvePath("sign/"+obj.id+".jpg");
 				var picByt:ByteArray = obj.byt;
 				var picFs:FileStream = new FileStream();
 				picFs.open(picFile,FileMode.WRITE);

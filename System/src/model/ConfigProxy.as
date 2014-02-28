@@ -28,7 +28,7 @@
 		{
 			super(NAME,data);
 		}
-		public function loadConfig(isSet:Boolean):void
+		public function loadConfig(isSet:Boolean=false):void
 		{
 			this.isSet = isSet;
 			var file:File = File.applicationStorageDirectory.resolvePath("assets/");
@@ -75,7 +75,6 @@
 			}
 			else
 			{
-				//启动
 				this.sendNotification(SystemFacade.START_MAIN);
 			}
 		}
@@ -100,6 +99,8 @@
 			fileStream.open(file, FileMode.WRITE);
 			fileStream.writeUTFBytes(String(xmlHead + "\r\n" + xmlStr));
 			fileStream.close();
+			
+			this.sendNotification(SystemFacade.LOAD_CONFIG);
 		}
 	}
 }

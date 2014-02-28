@@ -8,12 +8,14 @@ package signUi
 	{
 		public var requestList:Vector.<String>;
 		public var eventList:Vector.<String>;
+		private var eventBodyList:Vector.<Object>;
 		public function SignUiCore()
 		{
 			requestList = new Vector.<String>();
 			eventList = new Vector.<String>();
+			eventBodyList = new Vector.<Object>();
 		}
-		public function init(stageW:Number,stageH:Number,direction:String="up",ip:String=null):void
+		public function init(path:String,direction:String="up"):void
 		{
 			
 		}
@@ -22,6 +24,10 @@ package signUi
 			
 		}
 		public function injectCameraPic(bmpDa:BitmapData):void
+		{
+			
+		}
+		public function clear():void
 		{
 			
 		}

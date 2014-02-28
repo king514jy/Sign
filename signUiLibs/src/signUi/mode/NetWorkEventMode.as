@@ -47,6 +47,11 @@ package signUi.mode
 		 * 用图片抽取
 		 */
 		public static const LOTTERY_PICTURE:int = 9;
+		//模块自由信息(MODULE)
+		/**
+		 * 模块自由信息
+		 */
+		public static const MODULE_CUSTOM_INFORMATION:int = 10;
 		public function NetWorkEventMode()
 		{
 		}

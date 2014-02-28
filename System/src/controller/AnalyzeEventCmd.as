@@ -24,24 +24,34 @@ package controller
 			var configPro:ConfigProxy = this.facade.retrieveProxy(ConfigProxy.NAME) as ConfigProxy;
 			var socketPro:SocketProxy = this.facade.retrieveProxy(SocketProxy.NAME) as SocketProxy;
 			var type:String = notification.getType();
-			var informationObj:Object = notification.getBody().informationObj;
+			var info:Object = notification.getBody();
 			switch(type)
 			{
 				case ModuleEventMode.SAVE_PIC:
-					picHandlePro.savePic(informationObj,configPro.projectPath+"/"+configPro.projectName);
+					picHandlePro.savePic(info,configPro.projectPath+"/"+configPro.projectName);
+					break;
+				case ModuleEventMode.SAVE_PRINT_PIC:
+					picHandlePro.savePic(info,configPro.projectPath+"/"+configPro.projectName);
 					break;
 				case ModuleEventMode.SEND_PIC:
-					socketPro.send(informationObj);
+					socketPro.send(info);
 					break;
 				case ModuleEventMode.SEND_PIC_STATUS:
-					socketPro.send(informationObj);
+					socketPro.send(info);
+					break;
+				case ModuleEventMode.SEND_PIC_SEPARATE:
+					mainMe.newMain.clear();
+					socketPro.send(info);
 					break;
 				case ModuleEventMode.PHOTOGRAPH:
 					if(this.facade.hasCommand(SystemFacade.PHOTOGRAPH))
 						this.sendNotification(SystemFacade.PHOTOGRAPH);
 					break;
 				case ModuleEventMode.REFRESH_PIC:
-					socketPro.send(informationObj);
+					socketPro.send(info);
+					break;
+				case ModuleEventMode.SEND_CUSTOM_INFORMATION:
+					socketPro.send(info);
 					break;
 			}
 		}

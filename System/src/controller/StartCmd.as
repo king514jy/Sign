@@ -2,7 +2,6 @@ package controller
 {
 	import model.ConfigProxy;
 	import model.PicHandleProxy;
-	import model.ServerSocketProxy;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -33,9 +32,7 @@ package controller
 			this.facade.registerCommand(SystemFacade.SAVE_SYSTEM_SET,SaveSystemSetCmd);
 			this.facade.registerCommand(SystemFacade.START_MAIN,StartMainCmd);
 			
-			var obj:Object = new Object();
-			obj.isSet = false;
-			this.sendNotification(SystemFacade.LOAD_CONFIG,obj);
+			this.sendNotification(SystemFacade.LOAD_CONFIG);
 		}
 	}
 }

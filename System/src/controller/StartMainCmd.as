@@ -1,6 +1,5 @@
 package controller
 {
-	import flash.events.Event;
 	import flash.filesystem.File;
 	
 	import model.ConfigProxy;
@@ -29,6 +28,7 @@ package controller
 			var moduleMainMe:ModuleMainMe = this.facade.retrieveMediator(ModuleMainMe.NAME) as ModuleMainMe;
 			var devicesFolder:String;
 			var swfURL:String;
+			var swfPath:String;
 			var ip:String;
 			var direction:String;
 			var appRoot:AppRoot = AppRoot.getInstance();
@@ -43,11 +43,17 @@ package controller
 				direction = configPro.direction;
 			}
 			if(configPro.terminal == SetTerminalMode.DISPLAY)
+			{
 				swfURL = "/signShowUI/signShowUIMain.swf";
+				swfPath = "/signShowUI/";
+			}
 			else
+			{
 				swfURL = "/signUI/signUIMain.swf";
+				swfPath = "/signUI/";
+			}
 			var url:String = File.applicationStorageDirectory.resolvePath("assets/template/"+devicesFolder+configPro.coding+swfURL).url;
-			
+			var pathURL:String = File.applicationStorageDirectory.resolvePath("assets/template/"+devicesFolder+configPro.coding+swfPath).url;
 			if(configPro.role == SetRoleMode.SERVER)
 			{
 				ip = null;
@@ -58,9 +64,12 @@ package controller
 			else
 			{
 				ip = configPro.ip;
-				this.facade.registerProxy(new SocketProxy(ip));
+				if(!this.facade.hasProxy(SocketProxy.NAME))
+					this.facade.registerProxy(new SocketProxy());
+				var socketPro:SocketProxy = this.facade.retrieveProxy(SocketProxy.NAME) as SocketProxy;
+				socketPro.start(ip);
 			}
-			moduleMainMe.renderMasterFile(url,configPro.terminal,configPro.direction);
+			moduleMainMe.renderMasterFile(pathURL,url,configPro.terminal,configPro.direction);
 		}
 	}
 }

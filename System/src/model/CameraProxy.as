@@ -21,7 +21,7 @@ package model
 			if(!camera)
 			{
 				camera = Camera.getCamera();
-				camera.setMode(1200,900,30);
+				camera.setMode(1440,1080,30);
 				camera.setQuality(0,100);
 			}
 			return camera;

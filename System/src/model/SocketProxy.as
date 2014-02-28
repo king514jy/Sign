@@ -13,8 +13,17 @@ package model
 		public function SocketProxy(data:Object=null)
 		{
 			super(NAME, data);
-			_ip = data as String;
-			socketNetWork = new SocketNetWork(_ip);
+		}
+		public function start(ip:String):void
+		{
+			_ip = ip;
+			if(socketNetWork)
+			{
+				socketNetWork.close();
+				socketNetWork = null;
+			}
+			socketNetWork = new SocketNetWork();
+			socketNetWork.connect(ip);
 		}
 		public function send(obj:Object):void
 		{

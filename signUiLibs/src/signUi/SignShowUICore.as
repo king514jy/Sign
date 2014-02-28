@@ -11,7 +11,7 @@ package signUi
 		{
 			bytList = new Vector.<ByteArray>();
 		}
-		public function init():void
+		public function init(direction:String="up"):void
 		{
 			
 		}

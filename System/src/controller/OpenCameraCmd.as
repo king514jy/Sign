@@ -16,6 +16,8 @@ package controller
 		override public function execute(notification:INotification):void
 		{
 			var mainMe:ModuleMainMe = this.facade.retrieveMediator(ModuleMainMe.NAME) as ModuleMainMe;
+			if(!this.facade.hasProxy(CameraProxy.NAME))
+				this.facade.registerProxy(new CameraProxy());
 			var cameraPro:CameraProxy =  this.facade.retrieveProxy(CameraProxy.NAME) as CameraProxy;
 			mainMe.newMain.injectCamera(cameraPro.getCamera());
 		}

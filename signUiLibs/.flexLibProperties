@@ -20,9 +20,8 @@
     <classEntry path="signUi.controller.BoundaryWallsController"/>
     <classEntry path="signUi.mode.ModuleRequestMode"/>
     <classEntry path="signUi.mode.ModuleEventMode"/>
-    <classEntry path="signUi.display.PicBox"/>
+    <classEntry path="signUi.display.NetworkPicGroup"/>
     <classEntry path="signUi.mode.FolderNameMode"/>
-    <classEntry path="signUi.core.IPicBox"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

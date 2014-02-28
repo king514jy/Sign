@@ -7,7 +7,6 @@
 	import flash.events.MouseEvent;
 	import flash.filters.BlurFilter;
 	import flash.filters.DropShadowFilter;
-	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
 	import signUi.core.IAction;

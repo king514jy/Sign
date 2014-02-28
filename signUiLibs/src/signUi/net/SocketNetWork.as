@@ -1,5 +1,6 @@
 package signUi.net
 {
+	import flash.errors.IOError;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
@@ -13,20 +14,25 @@ package signUi.net
 		private var _ip:String;
 		private var _port:int;
 		private var objList:Vector.<Object>;
-		public function SocketNetWork(ip:String,port:int=2013)
+		public function SocketNetWork()
 		{
-			_ip = ip;
-			_port = port;
 			objList = new Vector.<Object>();
-			connect();
 		}
 		public function get ip():String{ return _ip; }
 		public function get port():int{ return _port; }
-		public function connect():void
+		public function connect(ip:String,port:int=2013):void
 		{
+			_ip = ip;
 			if(socket)
 			{
-				socket.close();
+				try 
+				{
+					socket.close();
+				}
+				catch (e:IOError)
+				{
+					trace (e);//Error: Error #2002: Operation attempted on invalid socket.
+				}
 				socket = null;
 			}
 			socket = new Socket();
@@ -59,7 +65,7 @@ package signUi.net
 			else
 			{
 				objList.push(obj);
-				connect();
+				connect(_ip);
 				
 			}
 		}
@@ -78,7 +84,17 @@ package signUi.net
 		}
 		public function close():void
 		{
-			socket.close();
+			if(socket)
+			{
+				try 
+				{
+					socket.close();
+				}
+				catch (e:IOError)
+				{
+					trace (e);//Error: Error #2002: Operation attempted on invalid socket.
+				}
+			}
 		}
 	}
 }

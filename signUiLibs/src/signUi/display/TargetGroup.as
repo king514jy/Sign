@@ -7,6 +7,7 @@ package signUi.display
 	{
 		private var _display:DisplayObject;
 		private var _isCenter:Boolean;
+		private var _id:String;
 		public function TargetGroup(display:DisplayObject,isCenter:Boolean=true)
 		{
 			_display = display;
@@ -21,6 +22,8 @@ package signUi.display
 			setPoint();
 		}
 		public function get isCenter():Boolean{ return _isCenter; }
+		public function set id(str:String):void{ _id = str; }
+		public function get id():String{ return _id; }
 		private function setPoint():void
 		{
 			if(_isCenter)
