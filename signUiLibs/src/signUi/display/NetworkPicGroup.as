@@ -6,6 +6,7 @@ package signUi.display
 	import flash.display.JPEGEncoderOptions;
 	import flash.display.Sprite;
 	import flash.events.NetDataEvent;
+	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
 	
@@ -33,11 +34,17 @@ package signUi.display
 				byt = _picBmpData.encode(new Rectangle(0,0,_picBmpData.width,_picBmpData.height),new JPEGEncoderOptions(100));
 			return byt;
 		}
-		public function draw(display:DisplayObject,isAdd:Boolean=false,isCenter:Boolean=true):void
+		public function draw(display:DisplayObject,isAdd:Boolean=false,isCenter:Boolean=true,scale:Number=1):void
 		{
-			if(!_picBmpData)
-				_picBmpData = new BitmapData(display.width,display.height,false);
-			_picBmpData.draw(display);
+			if(_picBmpData)
+			{
+				_picBmpData.dispose();
+				_picBmpData = null;
+			}
+			_picBmpData = new BitmapData(display.width,display.height,false);
+			var mat:Matrix = new Matrix();
+			mat.scale(scale,scale);
+			_picBmpData.draw(display,mat);
 			if(isAdd)
 			{
 				if(!pic)

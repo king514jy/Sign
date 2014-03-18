@@ -17,6 +17,8 @@
 		public static const CHANGE_BEGIN:String = "change_begin";
 		public static const CHANGE_OVER:String = "change_over";
 		public static const SAVE_CONFIG:String = "save_config";
+		public static const REQUEST_PROJECT_FOLDER:String = "request_project_folder";
+		public static const REQUEST_LOTTERY_PIC_LIST:String = "request_lottery_pic_list";
 		private var _numValue:Number;
 		private var _strValue:String;
 		public function ChangeDataEvent(type:String, numValue:Number = 0,strValue:String=null, bubbles:Boolean = false, cancelable:Boolean = false) 

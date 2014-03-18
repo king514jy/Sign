@@ -50,6 +50,7 @@
         <airExcludes>
           <pathEntry path="view"/>
           <pathEntry path="model"/>
+          <pathEntry path=".DS_Store"/>
         </airExcludes>
         <anePaths/>
         <newLaunchParams/>

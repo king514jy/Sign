@@ -10,11 +10,12 @@
 	import flash.geom.Point;
 	
 	import signUi.core.IAction;
+	import signUi.events.SignEvent;
 	
 	public class SignBoard extends Sprite implements IAction
 	{
 		private var brush:Sprite;
-		private var brushClass:Class;
+		private var brushData:BitmapData;
 		private var brushW:Number;
 		private var brushH:Number;
 		private var bm:Bitmap;
@@ -41,10 +42,15 @@
 		private var numUndoLevels:int = 10;
 		private var nowColor:int;
 		private var colorList:Vector.<uint>;
-		public function SignBoard(brushClass:Class,paperWidth:Number,paperHeight:Number)
+		private var isDispatch:Boolean;
+		public function SignBoard(brushData:BitmapData,paperWidth:Number,paperHeight:Number)
 		{
-			this.brushClass = brushClass;
-			brush = new brushClass();
+			this.brushData = brushData;
+			brush = new Sprite();
+			var bmp:Bitmap = new Bitmap(brushData);
+			bmp.x = -bmp.width * 0.5;
+			bmp.y = -bmp.height * 0.5;
+			brush.addChild(bmp);
 			brushW = brush.width;
 			brushH = brush.height;
 			this.paperWidth = paperWidth;
@@ -94,6 +100,8 @@
 			bm = new Bitmap(bmd);
 			bm.smoothing = true;
 			addChild(bm);
+			isDispatch = false;
+			dispatchEvent(new SignEvent(SignEvent.SIGN_REWRITE));
 		}
 		public function replyAction():void 
 		{
@@ -122,6 +130,11 @@
 			brush.visible = true;
 			
 			addEventListener(MouseEvent.MOUSE_MOVE, addBrush);
+			if(!isDispatch)
+			{
+				isDispatch = true;
+				dispatchEvent(new SignEvent(SignEvent.SIGN_COMPLETE));
+			}
 		}
 		
 		private function addBrush(e:Event):void
@@ -161,7 +174,11 @@
 				brushBox.addChild(bmp);
 				bmp.x = (disX / count) * (i + 1) + oldX;
 				bmp.y = (disY / count) * (i + 1) + oldY;*/
-				var br:Sprite = new brushClass();
+				var br:Sprite = new Sprite();
+				var bmp:Bitmap = new Bitmap(brushData.clone());
+				bmp.x = -bmp.width * 0.5;
+				bmp.y = -bmp.height * 0.5;
+				br.addChild(bmp);
 				br.filters = filterAr;
 				br.alpha = brushAlpha;
 				br.scaleX = br.scaleY = oldScale-i * scaleBili;

@@ -41,6 +41,10 @@ package
 		 */
 		public static const ANALYZE_EVENT:String = "analyze_event";
 		/**
+		 * 解析服务器接收到的数据
+		 */
+		public static const ANALYZE_SERVER_DATA:String = "analyze_server_data";
+		/**
 		 * 打开摄像头
 		 */
 		public static const OPEN_CAMERA:String = "open_camera";
@@ -56,10 +60,32 @@ package
 		 * 发送图片
 		 */
 		public static const SEND_PIC:String = "send_pic";
+		
+		/**
+		 * 服务器：接收图片并注入到UI
+		 */
+		public static const SERVER_INJECT_PIC:String = "server_inject_pic";
+		/**
+		 * 服务器：改天图片显示状态
+		 */
+		public static const SERVER_CHANGE_PIC_STATUS:String = "server_change_pic_status";
+		/**
+		 * 服务器：图片脱离控制，进去显示端模式
+		 */
+		public static const SERVER_PIC_SEPARATE:String = "server_pic_separate";
+		/**
+		 * 服务器：刷新图片
+		 */
+		public static const SERVER_REFRESH_PIC:String = "server_refresh_pic";
+		/**
+		 * 服务器：接收到模板自定义信息
+		 */
+		public static const SERVER_CUSTOM_INFORMATION:String = "server_custom_information";
 		/**
 		 * 关闭app;
 		 */
 		public static const CLOSE_APP:String = "close_app";
+		public static const OPEN_DEBUG_SOCKET:String = "open_debug_socket";
 		public static var instance:SystemFacade;
 		public function SystemFacade()
 		{

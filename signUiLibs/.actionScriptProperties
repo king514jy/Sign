@@ -35,6 +35,7 @@
       </libraryPathEntry>
       <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/greensock-as3/greensock.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/GestouchMaster/bin/GestouchMaster.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/Starling1.4/starling/bin/starling.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

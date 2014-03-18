@@ -83,7 +83,11 @@ package view
 		private function onComplete(e:Event):void
 		{
 			var loader:Loader = LoaderInfo(e.target).loader;
-			var main:Class = loader.contentLoaderInfo.applicationDomain.getDefinition("SignUIMain") as Class;
+			var main:Class;
+			if(terminal==SetTerminalMode.OPERATE)
+				main = loader.contentLoaderInfo.applicationDomain.getDefinition("SignUIMain") as Class;
+			else
+				main = loader.contentLoaderInfo.applicationDomain.getDefinition("SignShowUIMain") as Class;
 			_newMain = new main();
 			display = _newMain as DisplayObject;
 			root.addChild(display);
@@ -103,7 +107,7 @@ package view
 		}
 		private function handleEvent(e:NetDataEvent):void
 		{
-			trace("收到事件+"+e.type+"发送者"+e.target);
+			//trace("收到事件+"+e.type+"发送者"+e.target);
 			this.sendNotification(SystemFacade.ANALYZE_EVENT,e.info,e.type);
 		}
 	}

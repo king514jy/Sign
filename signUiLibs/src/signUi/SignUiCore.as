@@ -9,6 +9,8 @@ package signUi
 		public var requestList:Vector.<String>;
 		public var eventList:Vector.<String>;
 		private var eventBodyList:Vector.<Object>;
+		public var path:String;
+		public var direction:String;
 		public function SignUiCore()
 		{
 			requestList = new Vector.<String>();

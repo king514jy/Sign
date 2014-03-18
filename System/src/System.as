@@ -5,7 +5,6 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
-	import flash.system.Security;
 	import flash.ui.Mouse;
 	
 	import view.conmponents.AppRoot;
@@ -22,13 +21,14 @@ package
 			this.removeEventListener(Event.ADDED_TO_STAGE,init);
 			
 			stage.align = StageAlign.TOP_LEFT;
-			stage.scaleMode = StageScaleMode.SHOW_ALL;
-			//stage.scaleMode = StageScaleMode.NO_SCALE;
-			//stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			//stage.displayState = StageDisplayState.FULL_SCREEN;
+			//Mouse.hide();
 			appRoot = AppRoot.getInstance();
 			appRoot.root = this;
 			appRoot.stageW = stage.stageWidth;
 			appRoot.stageH = stage.stageHeight;
+			appRoot.openDebug();
 			SystemFacade.getInstance().startup();
 		}
 	}

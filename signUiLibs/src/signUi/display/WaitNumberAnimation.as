@@ -1,76 +1,44 @@
 package signUi.display
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.text.TextField;
-	import flash.text.TextFieldAutoSize;
-	import flash.text.TextFormat;
-	import flash.utils.getTimer;
 	
 	import signUi.events.AnimationEvent;
+	import signUi.utils.BmpIncision;
 	
 	public class WaitNumberAnimation extends Sprite
 	{
-		private var _size:uint = 20;
-		private var _fontName:String;
 		private var _interval:uint;
 		private var _startNumber:int;
 		private var _endNumber:int;
 		private var nowNumber:int;
-		private var txt:TextField;
 		private var oldTime:uint;
-		public function WaitNumberAnimation(startNumber:int=3,endNumber:int=0,interval:uint=1000,fontName:String="_sans",
-											size:uint=20,color:uint=0)
+		private var bmpAr:Array;
+		private var picSwitch:PicSwitchGroup;
+		public function WaitNumberAnimation(numberPNG:Bitmap,cutW:Number,startNumber:int=3,endNumber:int=0,interval:uint=1000)
 		{
 			_interval = interval;
 			_startNumber = startNumber;
 			_endNumber = endNumber;
-			txt = new TextField();
-			txt.autoSize = TextFieldAutoSize.CENTER;
-			txt.multiline = false;
-			txt.wordWrap = false;
-			//txt.border = true;
-			var tff:TextFormat = new TextFormat(fontName,size,color);
-			txt.defaultTextFormat = tff;
-			this.addChild(txt);
-			setPoint();
-			
-		}
-		public function start():void
-		{
-			nowNumber = _startNumber;
-			txt.text = String(nowNumber);
-			setPoint();
-			oldTime = getTimer();
-			this.addEventListener(Event.ENTER_FRAME,run);
-		}
-		public function stop():void
-		{
-			if(this.hasEventListener(Event.ENTER_FRAME))
-				this.removeEventListener(Event.ENTER_FRAME,run);
-		}
-		private function run(e:Event):void
-		{
-			if(getTimer() - oldTime >= _interval)
+			bmpAr = new Array();
+			var dataList:Vector.<BitmapData> = BmpIncision.pixel(numberPNG,cutW,numberPNG.height,null,true);
+			for(var i:int = 0;i<dataList.length;i++)
 			{
-				if(_startNumber > _endNumber)
-					nowNumber--;
-				else
-				nowNumber++;
-				oldTime = getTimer();		
-				if(nowNumber == _endNumber)
-				{
-					this.removeEventListener(Event.ENTER_FRAME,run);
-					dispatchEvent(new AnimationEvent(AnimationEvent.COMPLETE));		
-				}
-				txt.text = String(nowNumber);
-				setPoint();
+				bmpAr.push(new Bitmap(dataList[i]));
 			}
+			picSwitch = new PicSwitchGroup(bmpAr);
+			this.addChild(picSwitch);
 		}
-		private function setPoint():void
+		public function play():void
 		{
-			txt.x = -txt.width * 0.5;
-			txt.y = -txt.height * 0.5;
+			picSwitch.play(_startNumber,_endNumber,_interval);
+			picSwitch.addEventListener(AnimationEvent.COMPLETE,onComplete);
+		}
+		private function onComplete(e:AnimationEvent):void
+		{
+			dispatchEvent(new AnimationEvent(AnimationEvent.COMPLETE));
+			
 		}
 	}
 }

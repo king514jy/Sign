@@ -22,6 +22,25 @@
     <classEntry path="signUi.mode.ModuleEventMode"/>
     <classEntry path="signUi.display.NetworkPicGroup"/>
     <classEntry path="signUi.mode.FolderNameMode"/>
+    <classEntry path="signUi.display.PicGroup"/>
+    <classEntry path="signUi.debug.InformationGroup"/>
+    <classEntry path="signUi.controller.animation.PanElement"/>
+    <classEntry path="signUi.mode.AnimationDirectionMode"/>
+    <classEntry path="signUi.core.IAnimation"/>
+    <classEntry path="signUi.starlingdisplay.PicGroup"/>
+    <classEntry path="signUi.controller.animation.StPanElement"/>
+    <classEntry path="signUi.controller.animation.StPan"/>
+    <classEntry path="signUi.controller.animation.Arrangement"/>
+    <classEntry path="signUi.controller.animation.ArrangementManage"/>
+    <classEntry path="signUi.controller.animation.ArrangementVo"/>
+    <classEntry path="signUi.controller.RecordTargetTime"/>
+    <classEntry path="signUi.events.RecordTimeEvent"/>
+    <classEntry path="signUi.utils.RandomTool"/>
+    <classEntry path="signUi.events.RenderEvent"/>
+    <classEntry path="signUi.controller.animation.Ring"/>
+    <classEntry path="signUi.display.PicSwitchGroup"/>
+    <classEntry path="signUi.mode.DisplayAlignMode"/>
+    <classEntry path="signUi.display.SkewPicGroup"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

@@ -5,26 +5,34 @@ package signUi
 	
 	public class SignShowUICore extends Sprite
 	{
-		protected var bytList:Vector.<ByteArray>;
-		protected var nowByt:ByteArray;
+		public var path:String;
+		public var direction:String;
 		public function SignShowUICore()
-		{
-			bytList = new Vector.<ByteArray>();
-		}
-		public function init(direction:String="up"):void
 		{
 			
 		}
-		public function injectPic(byt:ByteArray,newPic:Boolean=true):void
+		public function init(path:String,direction:String="bottom",list:Vector.<String>=null):void
 		{
-			bytList.push(byt);
+			this.path = path;
+			this.direction = direction;
 		}
-		/**
-		 *播放为id为传入值的交互动画 
-		 * @param id 交互动画ID
-		 * 
-		 */		
-		public function playSmallAnimation(id:int):void
+		public function injectPic(byt:ByteArray,id:String):void
+		{
+			
+		}
+		public function changePicStatus(id:String,x:Number,y:Number,rotation:Number,scale:Number):void
+		{
+			
+		}
+		public function separatePic(id:String):void
+		{
+			
+		}
+		public function refreshPic(id:String,byt:ByteArray):void
+		{
+			
+		}
+		public function customInformation(obj:Object):void
 		{
 			
 		}

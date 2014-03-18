@@ -2,6 +2,7 @@ package controller
 {
 	import flash.filesystem.File;
 	
+	import model.AnalyzeServerDataProxy;
 	import model.ConfigProxy;
 	import model.ServerSocketProxy;
 	import model.SocketProxy;
@@ -57,9 +58,31 @@ package controller
 			if(configPro.role == SetRoleMode.SERVER)
 			{
 				ip = null;
-				var serverSocket:ServerSocketProxy = new ServerSocketProxy();
-				this.facade.registerProxy(serverSocket);
+				if(!this.facade.hasProxy(ServerSocketProxy.NAME))
+					this.facade.registerProxy(new ServerSocketProxy());
+				var serverSocket:ServerSocketProxy = this.facade.retrieveProxy(ServerSocketProxy.NAME) as ServerSocketProxy;
 				serverSocket.startSocket();
+				if(!this.facade.hasProxy(AnalyzeServerDataProxy.NAME))
+					this.facade.registerProxy(new AnalyzeServerDataProxy());
+				var analyzeServerData:AnalyzeServerDataProxy = this.facade.retrieveProxy(AnalyzeServerDataProxy.NAME) as AnalyzeServerDataProxy;
+				analyzeServerData.path = configPro.projectPath+"/"+configPro.projectName+"/";
+				if(!this.facade.hasCommand(SystemFacade.ANALYZE_SERVER_DATA))
+					this.facade.registerCommand(SystemFacade.ANALYZE_SERVER_DATA,AnalyzeServerDataCmd);
+				
+				if(!this.facade.hasCommand(SystemFacade.SERVER_INJECT_PIC))
+					this.facade.registerCommand(SystemFacade.SERVER_INJECT_PIC,ServerInjectPicCmd);
+				
+				if(!this.facade.hasCommand(SystemFacade.SERVER_CHANGE_PIC_STATUS))
+					this.facade.registerCommand(SystemFacade.SERVER_CHANGE_PIC_STATUS,ServerChangePicStatusCmd);
+				
+				if(!this.facade.hasCommand(SystemFacade.SERVER_REFRESH_PIC))
+					this.facade.registerCommand(SystemFacade.SERVER_REFRESH_PIC,ServerRefreshPicCmd);
+				
+				if(!this.facade.hasCommand(SystemFacade.SERVER_PIC_SEPARATE))
+					this.facade.registerCommand(SystemFacade.SERVER_PIC_SEPARATE,ServerPicSeparateCmd);
+				
+				if(!this.facade.hasCommand(SystemFacade.SERVER_CUSTOM_INFORMATION))
+					this.facade.registerCommand(SystemFacade.SERVER_CUSTOM_INFORMATION,ServerCustomInformationCmd);
 			}
 			else
 			{
