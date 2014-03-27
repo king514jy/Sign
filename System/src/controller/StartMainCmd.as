@@ -92,7 +92,7 @@ package controller
 				var socketPro:SocketProxy = this.facade.retrieveProxy(SocketProxy.NAME) as SocketProxy;
 				socketPro.start(ip);
 			}
-			moduleMainMe.renderMasterFile(pathURL,url,configPro.terminal,configPro.direction);
+			moduleMainMe.renderMasterFile(pathURL,url,configPro.terminal,configPro.direction,configPro.picList);
 		}
 	}
 }

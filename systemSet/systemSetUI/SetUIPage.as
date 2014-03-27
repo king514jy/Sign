@@ -1,17 +1,19 @@
 ﻿package systemSetUI
 {
-	import flash.display.Sprite;
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Quint;
-	import flash.events.Event;
+	
 	import flash.display.SimpleButton;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import systemSetUI.events.SystemSetEvent;
-	import systemSetUI.cfg.SetModlueConfig;
+	
 	import signUi.mode.SetDevicesMode;
 	import signUi.mode.SetRoleMode;
 	
-	public class SetUIPage extends Sprite
+	import systemSetUI.cfg.SetModlueConfig;
+	import systemSetUI.events.SystemSetEvent;
+	
+	public class SetUIPage extends SetUIBase
 	{
 		private var queueList:Vector.<SetBase>;
 		private var endX:uint = 512;

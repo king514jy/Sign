@@ -22,13 +22,13 @@ package
 			
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			//stage.displayState = StageDisplayState.FULL_SCREEN;
-			//Mouse.hide();
+			stage.displayState = StageDisplayState.FULL_SCREEN;
+			Mouse.hide();
 			appRoot = AppRoot.getInstance();
 			appRoot.root = this;
 			appRoot.stageW = stage.stageWidth;
 			appRoot.stageH = stage.stageHeight;
-			appRoot.openDebug();
+			//appRoot.openDebug();
 			SystemFacade.getInstance().startup();
 		}
 	}

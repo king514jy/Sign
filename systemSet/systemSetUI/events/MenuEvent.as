@@ -9,6 +9,10 @@ package systemSetUI.events
 		 */
 		public static const SET_SYSTEM:String = "set_system";
 		/**
+		 * 设置当前模板
+		 */
+		public static const SET_CURRENT_MODULE = "set_current_module";
+		/**
 		 * 抽奖设置
 		 */
 		public static const SET_LOTTERY:String = "set_lottery";

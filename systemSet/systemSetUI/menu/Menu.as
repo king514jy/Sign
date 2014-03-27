@@ -1,14 +1,15 @@
-package systemSetUI.menu
+﻿package systemSetUI.menu
 {
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
+	import systemSetUI.SetUIBase;
 	import systemSetUI.events.MenuEvent;
 
-	public class Menu extends Sprite
+	public class Menu extends SetUIBase
 	{
 		private var systemBtn:MovieClip;
+		private var setModuleBtn:MovieClip;
 		private var lotteryBtn:MovieClip;
 		private var installBtn:MovieClip;
 		private var uninstallBtn:MovieClip;
@@ -26,9 +27,10 @@ package systemSetUI.menu
 			uninstallBtn = this.getChildByName("uninstall_btn") as MovieClip;
 			openLotteryBtn = this.getChildByName("open_lottery_btn") as MovieClip;
 			passwordBtn = this.getChildByName("password_btn") as MovieClip;
-			btnList.push(systemBtn,lotteryBtn,installBtn,uninstallBtn,openLotteryBtn,passwordBtn);
-			valueList.push(MenuEvent.SET_SYSTEM,MenuEvent.SET_LOTTERY,MenuEvent.INSTALL_MODULE,
-							MenuEvent.UNINSTALL_MODULE,MenuEvent.OPEN_LOTTERY,MenuEvent.CHANGE_PASSWORD);
+			setModuleBtn = this.getChildByName("set_module_btn") as MovieClip;
+			btnList.push(systemBtn,setModuleBtn,installBtn,uninstallBtn,lotteryBtn,openLotteryBtn,passwordBtn);
+			valueList.push(MenuEvent.SET_SYSTEM,MenuEvent.SET_CURRENT_MODULE,MenuEvent.INSTALL_MODULE,
+							MenuEvent.UNINSTALL_MODULE,MenuEvent.SET_LOTTERY,MenuEvent.OPEN_LOTTERY,MenuEvent.CHANGE_PASSWORD);
 			addMouseEvent();
 		}
 		private function addMouseEvent():void

@@ -1,4 +1,4 @@
-package systemSetUI.cfg
+﻿package systemSetUI.cfg
 {
 	import flash.display.Sprite;
 	import flash.text.TextField;
@@ -11,9 +11,14 @@ package systemSetUI.cfg
 			valueTxt = this.getChildByName("value_txt") as TextField;
 		}
 		public function get value():String{ return valueTxt.text; }
+		public function get textField():TextField{ return valueTxt; }
 		public function add(str:String):void
 		{
 			valueTxt.appendText(str);
+		}
+		public function clear():void
+		{
+			valueTxt.text = "";
 		}
 		public function del():void
 		{

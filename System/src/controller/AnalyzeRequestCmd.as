@@ -8,6 +8,7 @@ package controller
 	import signUi.mode.ModuleRequestMode;
 	
 	import view.ModuleMainMe;
+	import view.SinaWeiboMe;
 	
 	public class AnalyzeRequestCmd extends SimpleCommand
 	{
@@ -25,6 +26,12 @@ package controller
 				this.facade.registerCommand(SystemFacade.PHOTOGRAPH,PhotographCmd);
 				this.facade.registerProxy(new CameraProxy());
 				this.sendNotification(SystemFacade.OPEN_CAMERA);
+			}
+			if(requestList.indexOf(ModuleRequestMode.REQUEST_MICROBLOG)!=-1)
+			{
+				//var sinaMe:SinaWeiboMe = new SinaWeiboMe();
+				//this.facade.registerMediator(sinaMe);
+				//sinaMe.start();
 			}
 		}
 	}

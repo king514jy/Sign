@@ -1,7 +1,8 @@
 package signUi.mode
 {
-	public class AnimationDirectionMode
+	public class InteractiveLayoutMode
 	{
+		
 		/**
 		 * 方向向左
 		 */
@@ -12,7 +13,15 @@ package signUi.mode
 		public static const RIGHT:String = "right";
 		public static const UP:String = "up";
 		public static const DOWN:String = "down";
-		public function AnimationDirectionMode()
+		/**
+		 * 圆弧
+		 */
+		public static const ARC:String = "arc";
+		/**
+		 * 散射
+		 */
+		public static const SCATTERING:String = "scattering";
+		public function InteractiveLayoutMode()
 		{
 		}
 	}

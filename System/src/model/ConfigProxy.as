@@ -10,6 +10,8 @@
 	import org.puremvc.as3.interfaces.IProxy;
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
+	import signUi.mode.FolderNameMode;
+	
 	public class ConfigProxy extends Proxy implements IProxy
 	{
 		public static const NAME:String="ConfigProxy";
@@ -24,6 +26,7 @@
 		public var coding:String;
 		public var ip:String;
 		public var password:String;
+		public var picList:Vector.<String>;
 		public function ConfigProxy(data:Object=null)
 		{
 			super(NAME,data);
@@ -59,6 +62,7 @@
 			coding = xml.template.@coding;
 			ip = xml.server.@ip;
 			password = xml.password.@p;
+			checkPicList();
 			if(isSet)
 			{
 				var obj:Object = new Object();
@@ -101,6 +105,25 @@
 			fileStream.close();
 			
 			this.sendNotification(SystemFacade.LOAD_CONFIG);
+		}
+		private function checkPicList():void
+		{
+			var file:File = new File(projectPath+"/"+projectName+"/"+FolderNameMode.SIGN_DISPLAY+"/");
+			if(file.exists)
+			{
+				var ar:Array = file.getDirectoryListing();
+				if(ar.length>0)
+				{
+					picList = new Vector.<String>();
+					for(var i:int=0;i<ar.length;i++)
+					{
+						if(ar[i].url.indexOf(".jpg")!=-1)
+						{
+							picList.push(ar[i].url);
+						}
+					}
+				}
+			}
 		}
 	}
 }

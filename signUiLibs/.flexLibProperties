@@ -41,6 +41,9 @@
     <classEntry path="signUi.display.PicSwitchGroup"/>
     <classEntry path="signUi.mode.DisplayAlignMode"/>
     <classEntry path="signUi.display.SkewPicGroup"/>
+    <classEntry path="signUi.controller.PicGroupController"/>
+    <classEntry path="signUi.controller.InteractiveLayoutManage"/>
+    <classEntry path="signUi.mode.InteractiveLayoutMode"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

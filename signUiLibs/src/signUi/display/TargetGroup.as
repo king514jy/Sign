@@ -39,7 +39,7 @@ package signUi.display
 		}
 		public function dispose():void
 		{
-			this.removeChild(_display);
+			this.removeChildren();
 			_display = null;
 		}
 	}

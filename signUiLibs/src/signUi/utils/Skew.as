@@ -10,7 +10,8 @@ package signUi.utils {
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
 
-	public class Skew {
+	public class Skew
+	{
 
 		//切割成多个三角形
 		private var _container : DisplayObjectContainer;
@@ -49,6 +50,7 @@ package signUi.utils {
 			init();
 		}
 		public function get container():DisplayObjectContainer{ return _container; }
+		public function get group():Sprite{ return _sp; }
 		private function init() : void {
 			_sp = new Sprite;
 			_container.addChild(_sp);

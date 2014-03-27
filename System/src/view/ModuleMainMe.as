@@ -35,6 +35,7 @@ package view
 		private var terminal:String;
 		private var direction:String;
 		private var path:String;
+		private var picList:Vector.<String>;
 		private var socketNetWork:SocketNetWork;
 		
 		public function ModuleMainMe(viewComponent:Object=null)
@@ -44,11 +45,12 @@ package view
 			appRoot = AppRoot.getInstance();
 		}
 		public function get newMain():Object{ return _newMain; }
-		public function renderMasterFile(path:String,url:String,terminal:String,direction:String=null):void
+		public function renderMasterFile(path:String,url:String,terminal:String,direction:String=null,picList:Vector.<String>=null):void
 		{
 			this.terminal = terminal;
 			this.direction = direction;
 			this.path = path;
+			this.picList = picList;
 			if(_newMain)
 			{
 				root.removeChild(display);
@@ -91,7 +93,12 @@ package view
 			_newMain = new main();
 			display = _newMain as DisplayObject;
 			root.addChild(display);
-			_newMain.init(path,direction);
+			
+			if(terminal==SetTerminalMode.OPERATE)
+				_newMain.init(path,direction);
+			else
+				_newMain.init(path,direction,picList);
+			
 			if(terminal==SetTerminalMode.OPERATE)
 			{
 				this.facade.registerCommand(SystemFacade.ANALYZE_REQUEST,AnalyzeRequestCmd);

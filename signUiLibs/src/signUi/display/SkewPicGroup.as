@@ -1,25 +1,26 @@
 package signUi.display
 {
+	import signUi.mode.DisplayAlignMode;
 	import signUi.utils.Skew;
 
 	public class SkewPicGroup extends PicGroup
 	{
 		private var skew:Skew;
-		private var _x0:Number;
-		private var _x1:Number;
-		private var _x2:Number;
-		private var _x3:Number;
-		private var _y0:Number;
-		private var _y1:Number;
-		private var _y2:Number;
-		private var _y3:Number;
+		private var _x0:Number = 0;
+		private var _x1:Number = 0;
+		private var _x2:Number = 0;
+		private var _x3:Number = 0;
+		private var _y0:Number = 0;
+		private var _y1:Number = 0;
+		private var _y2:Number = 0;
+		private var _y3:Number = 0;
 		private var _align:String;
 		public function SkewPicGroup(id:String=null, align:String="center_center", scale:Number=1, smoothing:Boolean=false)
 		{
 			super(id, align, scale, smoothing);
 			_align = align;
 		}
-		public function set x0(n:Number):void{_x0 = n;trace(n);setTransform();}
+		public function set x0(n:Number):void{_x0 = n;setTransform();}
 		public function set x1(n:Number):void{_x1 = n;setTransform();}
 		public function set x2(n:Number):void{_x2 = n;setTransform();}
 		public function set x3(n:Number):void{_x3 = n;setTransform();}
@@ -39,7 +40,38 @@ package signUi.display
 		public function openSkew():void
 		{
 			this.removeChildren();
+			switch(_align)
+			{
+				case DisplayAlignMode.LEFT_TOP:
+					break;
+				case DisplayAlignMode.LEFT_CENTER:
+					break;
+				case DisplayAlignMode.LEFT_BOTTOM:
+					break;
+				case DisplayAlignMode.CENTER_TOP:
+					_x0 = -pic.bitmapData.width * 0.5;
+					_x1 = pic.bitmapData.width * 0.5;
+					_x2 = pic.bitmapData.width * 0.5;
+					_x3 = -pic.bitmapData.width * 0.5;
+					_y0 = 0;
+					_y1 = 0;
+					_y2 = pic.bitmapData.height;
+					_y3 = pic.bitmapData.height;
+					break;
+				case DisplayAlignMode.CENTER_CENTER:
+					break;
+				case DisplayAlignMode.CENTER_BOTTOM:
+					break;
+				case DisplayAlignMode.RIGHT_TOP:
+					break;
+				case DisplayAlignMode.RIGHT_CENTER:
+					break;
+				case DisplayAlignMode.RIGHT_BOTTOM:
+					break;
+			}
+			
 			skew = new Skew(this,pic.bitmapData,4,4);
+			setTransform();
 		}
 		public function closeSkew():void
 		{

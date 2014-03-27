@@ -31,7 +31,7 @@ package signUi.display
 		{
 			var byt:ByteArray = new ByteArray();
 			if(_picBmpData)
-				byt = _picBmpData.encode(new Rectangle(0,0,_picBmpData.width,_picBmpData.height),new JPEGEncoderOptions(100));
+				byt = _picBmpData.encode(new Rectangle(0,0,_picBmpData.width,_picBmpData.height),new JPEGEncoderOptions());
 			return byt;
 		}
 		public function draw(display:DisplayObject,isAdd:Boolean=false,isCenter:Boolean=true,scale:Number=1):void

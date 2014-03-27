@@ -35,6 +35,10 @@ package signUi.mode
 		 * 拍照(图片从相机获取后，回注入模块)
 		 */
 		public static const PHOTOGRAPH:String = "photograph";
+		/**
+		 * 发送微博(object{byt:ByteArray,name:String})
+		 */
+		public static const SEND_WEIBO:String = "send_weibo";
 		//public static const CLEAR_MODULE:String = "clear_module";
 		public function ModuleEventMode()
 		{
