@@ -1,8 +1,8 @@
-package systemSetUI.cfg.components 
+﻿package systemSetUI.cfg.components 
 {
 	import flash.display.Sprite;
 	import flash.display.Sprite;
-	import com.kingclass.utils.ScaleBitmap
+	import ky.utils.ScaleBitmap
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.filters.DropShadowFilter;

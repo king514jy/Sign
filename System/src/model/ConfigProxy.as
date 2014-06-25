@@ -2,50 +2,51 @@
 {
 	import flash.events.Event;
 	import flash.filesystem.File;
-	import flash.filesystem.FileMode;
-	import flash.filesystem.FileStream;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	
+	import ky.mode.FolderNameMode;
+	import ky.utils.XMLTool;
 	
 	import org.puremvc.as3.interfaces.IProxy;
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
-	import signUi.mode.FolderNameMode;
 	
 	public class ConfigProxy extends Proxy implements IProxy
 	{
 		public static const NAME:String="ConfigProxy";
+		private const USER:String = "moon";
 		private var xmlHead:String = '<?xml version="1.0" encoding="utf-8" ?>';
-		private var isSet:Boolean;
-		public var projectName:String;
-		public var projectPath:String;
-		public var devices:String;
-		public var direction:String;
-		public var terminal:String;
-		public var role:String;
-		public var coding:String;
-		public var ip:String;
+		public var projectName:String = "";
+		public var projectPath:String = "";
+		public var direction:String = "bottom";
+		public var terminal:String = "display";
+		public var coding:String = "0";
+		public var ip:String = "192.168.1.222";
 		public var password:String;
 		public var picList:Vector.<String>;
+		private var separator:String = File.separator;
 		public function ConfigProxy(data:Object=null)
 		{
 			super(NAME,data);
 		}
-		public function loadConfig(isSet:Boolean=false):void
+		public function get user():String{ return USER; }
+		public function loadConfig():void
 		{
-			this.isSet = isSet;
-			var file:File = File.applicationStorageDirectory.resolvePath("assets/");
-			var fileSelf:File = File.applicationDirectory.resolvePath("assets/");
+			var file:File = File.applicationStorageDirectory.resolvePath("assets"+separator);
+			var fileSelf:File = File.applicationDirectory.resolvePath("assets"+separator);
 			if(!file.exists)
 			{
 				fileSelf.copyTo(file);
+				projectName = "ky";
+				projectPath = File.desktopDirectory.nativePath;
 				//初始设置
-				this.sendNotification(SystemFacade.OPEN_SYSTEM_SET,null,"inital");
+				this.sendNotification(SystemFacade.OPEN_PASSWORD_UI,{isSet:true});
 			}
 			else
 			{
 				var urlLoader:URLLoader = new URLLoader();
-				urlLoader.load(new URLRequest(file.url+"/config.xml"));
+				urlLoader.load(new URLRequest(file.url+separator+"config.xml"));
 				urlLoader.addEventListener(Event.COMPLETE,complete);
 			}
 		}
@@ -55,71 +56,50 @@
 			var xml:XML = XML(urlLoader.data);
 			projectName = xml.project.@name;
 			projectPath = xml.project.@path;
-			devices = xml.devices.@num;
 			direction = xml.devices.@direction;
 			terminal = xml.devices.@terminal;
-			role = xml.devices.@role;
 			coding = xml.template.@coding;
 			ip = xml.server.@ip;
 			password = xml.password.@p;
 			checkPicList();
-			if(isSet)
-			{
-				var obj:Object = new Object();
-				obj.projectName = projectName;
-				obj.projectPath = projectPath;
-				obj.devices = devices;
-				obj.direction = direction;
-				obj.terminal = terminal;
-				obj.role = role;
-				obj.coding = coding;
-				obj.ip = ip;
-				obj.password = password;
-				this.sendNotification(SystemFacade.OPEN_SYSTEM_SET,obj,"new_setting");
-			}
-			else
-			{
-				this.sendNotification(SystemFacade.START_MAIN);
-			}
+			this.sendNotification(SystemFacade.INIT_MODULE_MANAGE);
 		}
-		public function saveConfig(obj:Object):void
+		public function saveConfig():void
 		{
 			var xml:XML = <data></data>
-			var projectXML:XML = <project path={obj.projectPath} name={obj.projectName} />
-			var devicesXML:XML = <devices num={obj.devices} direction={obj.direction} terminal={obj.terminal} role={obj.role}/>
-			var templateXML:XML = <template coding={obj.coding} />
-			var serverXML:XML = <server ip={obj.ip} />
-			var passwordXML:XML = <password p={obj.password} />
+			var projectXML:XML = <project path={this.projectPath} name={this.projectName} />
+			var devicesXML:XML = <devices direction={this.direction} terminal={this.terminal}/>
+			var templateXML:XML = <template coding={this.coding} />
+			var serverXML:XML = <server ip={this.ip} />
+			var passwordXML:XML = <password p={this.password} />
 			xml.appendChild(projectXML);
 			xml.appendChild(devicesXML);
 			xml.appendChild(templateXML);
 			xml.appendChild(serverXML);
 			xml.appendChild(passwordXML);
 			var xmlStr:String = xml.toString();
-			var pattern:RegExp =  /\n/g;
-			xmlStr = xmlStr.replace(pattern, "\r\n");
 			var file:File = File.applicationStorageDirectory.resolvePath("assets/config.xml");
-			var fileStream:FileStream = new FileStream();
-			fileStream.open(file, FileMode.WRITE);
-			fileStream.writeUTFBytes(String(xmlHead + "\r\n" + xmlStr));
-			fileStream.close();
+			XMLTool.writeXML(file,xmlStr);
 			
 			this.sendNotification(SystemFacade.LOAD_CONFIG);
 		}
 		private function checkPicList():void
 		{
-			var file:File = new File(projectPath+"/"+projectName+"/"+FolderNameMode.SIGN_DISPLAY+"/");
+			var file:File = new File(projectPath+separator+projectName+separator+FolderNameMode.SIGN_DISPLAY+separator);
 			if(file.exists)
 			{
 				var ar:Array = file.getDirectoryListing();
 				if(ar.length>0)
 				{
 					picList = new Vector.<String>();
-					for(var i:int=0;i<ar.length;i++)
+					var le:uint = Math.min(50,ar.length);
+					for(var i:int=0;i<le;i++)
 					{
-						if(ar[i].url.indexOf(".jpg")!=-1)
+						var n:uint = Math.floor(Math.random() * ar.length);
+						if(ar[n].url.indexOf(".jpg")!=-1)
 						{
-							picList.push(ar[i].url);
+							picList.push(ar[n].url);
+							ar.splice(n,1);
 						}
 					}
 				}

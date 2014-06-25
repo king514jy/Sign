@@ -5,10 +5,11 @@ package model
 	import flash.filesystem.FileStream;
 	import flash.utils.ByteArray;
 	
+	import ky.mode.FolderNameMode;
+	import ky.mode.NetWorkEventMode;
+	
 	import org.puremvc.as3.interfaces.IProxy;
 	import org.puremvc.as3.patterns.proxy.Proxy;
-	
-	import signUi.mode.NetWorkEventMode;
 	
 	import view.conmponents.AppRoot;
 	
@@ -17,6 +18,7 @@ package model
 		public static const NAME:String = "AnalyzeServerDataProxy";
 		private var _path:String;
 		private var appRoot:AppRoot;
+		private var separator:String = File.separator;
 		public function AnalyzeServerDataProxy(data:Object=null)
 		{
 			super(NAME, data);
@@ -34,7 +36,7 @@ package model
 				{
 					case NetWorkEventMode.PICTURE_TRANSPORT:
 						//appRoot.addDebugInfo("接收图片"+obj.id);
-						var picFile:File = new File(_path+"signDisplay/"+obj.id+".jpg");
+						var picFile:File = new File(_path+FolderNameMode.SIGN_DISPLAY+separator+obj.id+".jpg");
 						var picByt:ByteArray = obj.byt;
 						var picFs:FileStream = new FileStream();
 						picFs.open(picFile,FileMode.WRITE);
@@ -53,7 +55,7 @@ package model
 						break;
 					case NetWorkEventMode.PICTURE_REFRESH:
 						//appRoot.addDebugInfo("刷新图片"+obj.id);
-						var picFile2:File = new File(_path+"signDisplay/"+obj.id+".jpg");
+						var picFile2:File = new File(_path+FolderNameMode.SIGN_DISPLAY+separator+obj.id+".jpg");
 						var picByt2:ByteArray = obj.byt;
 						var picFs2:FileStream = new FileStream();
 						picFs2.open(picFile2,FileMode.WRITE);

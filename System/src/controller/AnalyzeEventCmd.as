@@ -7,10 +7,9 @@ package controller
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	import signUi.mode.ModuleEventMode;
+	import ky.mode.ModuleEventMode;
 	
 	import view.ModuleMainMe;
-	import view.SinaWeiboMe;
 	
 	public class AnalyzeEventCmd extends SimpleCommand
 	{
@@ -24,8 +23,6 @@ package controller
 			var picHandlePro:PicHandleProxy = this.facade.retrieveProxy(PicHandleProxy.NAME) as PicHandleProxy;
 			var configPro:ConfigProxy = this.facade.retrieveProxy(ConfigProxy.NAME) as ConfigProxy;
 			var socketPro:SocketProxy = this.facade.retrieveProxy(SocketProxy.NAME) as SocketProxy;
-			if(this.facade.hasMediator(SinaWeiboMe.NAME))
-				var sinaMe:SinaWeiboMe = this.facade.retrieveMediator(SinaWeiboMe.NAME) as SinaWeiboMe;
 			var type:String = notification.getType();
 			var info:Object = notification.getBody();
 			switch(type)
@@ -55,9 +52,6 @@ package controller
 					break;
 				case ModuleEventMode.SEND_CUSTOM_INFORMATION:
 					socketPro.send(info);
-					break;
-				case ModuleEventMode.SEND_WEIBO:
-					sinaMe.sendPic(info.byt,info.infomation);
 					break;
 			}
 		}

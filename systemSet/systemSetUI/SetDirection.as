@@ -2,7 +2,7 @@
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import signUi.mode.SetDirectionMode;
+	import ky.mode.SetDirectionMode;
 	import flash.events.MouseEvent;
 
 	public class SetDirection extends SetBase
@@ -18,7 +18,7 @@
 		override protected function clickHandle(e:MouseEvent):void
 		{
 			super.clickHandle(e);
-			goto = 3;
+			goto = 2;
 			dispatchEvent(new Event("goto"));
 		}
 	}

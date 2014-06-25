@@ -32,7 +32,7 @@
 			bgB = this.getChildByName("bgB_mc") as MovieClip;
 			enterBtn = this.getChildByName("enter_btn") as SimpleButton;
 			numKeyboard = new NumberKeyboard();
-			numKeyboard.x = -143;
+			numKeyboard.x = 369;
 			numKeyboard.addEventListener(NumberKeyboardEvent.CLICK_NUM,clickNum);
 			numKeyboard.addEventListener(NumberKeyboardEvent.CLOSE,closeNum);
 			setSelf();
@@ -57,9 +57,6 @@
 			if(_isInit)
 			{
 				titleTxt.text = "请设置密码";
-				titleTxt.y = -172;
-				bgA.y = -122;
-				passwordTxt.y = -118;
 				passwordTxt.text = "";
 				bgB.visible = true;
 				passwordAgainTxt.visible = true;
@@ -69,9 +66,6 @@
 			else
 			{
 				titleTxt.text = "请输入密码";
-				titleTxt.y = -80;
-				bgA.y = -30;
-				passwordTxt.y = -26;
 				passwordTxt.text = "";
 				bgB.visible = false;
 				passwordAgainTxt.visible = false;

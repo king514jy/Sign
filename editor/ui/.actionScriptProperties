@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<actionScriptProperties analytics="false" mainApplicationPath="signEditorUI.as" projectUUID="be0880c0-8f41-4397-8a5d-21f7864c3fec" version="11">
+  <compiler additionalCompilerArguments="-locale en_US" advancedTelemetry="false" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" strict="true" targetPlayerVersion="14.0.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
+    <compilerSourcePath/>
+    <libraryPath defaultLinkType="0">
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/sdk/AIRSDK_Compiler13/frameworks/libs/air/airglobal.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="1" linkType="1" path="${FLASHPRO_APPCONFIG}/ActionScript 3.0/libs"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/away3d/away3d-core-fp11_4_1_4.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/GestouchMaster/bin/GestouchMaster.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/Starling1.4/starling/bin/starling.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/fzip-master/bin/fzip.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/第三方库/greensock-as3/greensock.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/sign/Sign/signUiLibs/bin/kyTools.swc" useDefaultLinkType="false"/>
+    </libraryPath>
+    <sourceAttachmentPath/>
+  </compiler>
+  <applications>
+    <application path="signEditorUI.as"/>
+  </applications>
+  <modules/>
+  <workers/>
+  <buildCSSFiles/>
+  <flashCatalyst validateFlashCatalystCompatibility="false"/>
+</actionScriptProperties>

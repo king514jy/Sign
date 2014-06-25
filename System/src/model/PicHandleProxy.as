@@ -11,13 +11,14 @@ package model
 	public class PicHandleProxy extends Proxy implements IProxy
 	{
 		public static const NAME:String = "PicHandleProxy";
+		private var separator:String = File.separator;
 		public function PicHandleProxy(data:Object=null)
 		{
 			super(NAME, data);
 		}
 		public function savePic(obj:Object,path:String):void
 		{
-			var picFile:File = new File(path+"/"+obj.folderName+"/"+obj.id+".jpg");
+			var picFile:File = new File(path+separator+obj.folderName+separator+obj.id+".jpg");
 			var picByt:ByteArray = obj.byt;
 			var picFs:FileStream = new FileStream();
 			picFs.open(picFile,FileMode.WRITE);

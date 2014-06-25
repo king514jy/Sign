@@ -31,7 +31,7 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/sign/Sign/signUiLibs/bin/signUiCore.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Users/Humberger/Documents/myflash/sign/Sign/signUiLibs/bin/kyTools.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
@@ -62,5 +62,7 @@
     </buildTarget>
   </buildTargets>
 </actionScriptProperties>
+
+
 
 

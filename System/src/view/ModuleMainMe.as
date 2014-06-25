@@ -19,8 +19,8 @@ package view
 	import org.puremvc.as3.interfaces.IMediator;
 	import org.puremvc.as3.patterns.mediator.Mediator;
 	
-	import signUi.mode.SetTerminalMode;
-	import signUi.net.SocketNetWork;
+	import ky.mode.SetTerminalMode;
+	import ky.net.SocketNetWork;
 	
 	import view.conmponents.AppRoot;
 	

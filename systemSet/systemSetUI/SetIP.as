@@ -78,7 +78,7 @@
 		}
 		private function enter(e:MouseEvent):void
 		{
-			goto = 6;
+			goto = 4;
 			value = txt.text;
 			dispatchEvent(new Event("goto"));
 		}

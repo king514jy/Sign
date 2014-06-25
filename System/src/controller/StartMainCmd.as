@@ -1,21 +1,20 @@
 package controller
 {
 	import flash.filesystem.File;
+
+	import ky.mode.SetTerminalMode;
 	
 	import model.AnalyzeServerDataProxy;
 	import model.ConfigProxy;
+	import model.RuntimeProxy;
 	import model.ServerSocketProxy;
 	import model.SocketProxy;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 	
-	import signUi.mode.SetDevicesMode;
-	import signUi.mode.SetRoleMode;
-	import signUi.mode.SetTerminalMode;
 	
 	import view.ModuleMainMe;
-	import view.conmponents.AppRoot;
 	
 	public class StartMainCmd extends SimpleCommand
 	{
@@ -26,38 +25,12 @@ package controller
 		override public function execute(notification:INotification):void
 		{
 			var configPro:ConfigProxy = this.facade.retrieveProxy(ConfigProxy.NAME) as ConfigProxy;
+			var runPro:RuntimeProxy = this.facade.retrieveProxy(RuntimeProxy.NAME) as RuntimeProxy;
 			var moduleMainMe:ModuleMainMe = this.facade.retrieveMediator(ModuleMainMe.NAME) as ModuleMainMe;
-			var devicesFolder:String;
-			var swfURL:String;
-			var swfPath:String;
-			var ip:String;
-			var direction:String;
-			var appRoot:AppRoot = AppRoot.getInstance();
-			if(configPro.devices == SetDevicesMode.SIGNLE)
-			{
-				devicesFolder = "signle/";
-				direction = null;
-			}
-			else
-			{
-				devicesFolder = "multi/";
-				direction = configPro.direction;
-			}
+			var swfURL:String = new File(runPro.tempDirectory+runPro.swfName).url;
+			var pathURL:String = new File(runPro.tempDirectory).url+"/";
 			if(configPro.terminal == SetTerminalMode.DISPLAY)
 			{
-				swfURL = "/signShowUI/signShowUIMain.swf";
-				swfPath = "/signShowUI/";
-			}
-			else
-			{
-				swfURL = "/signUI/signUIMain.swf";
-				swfPath = "/signUI/";
-			}
-			var url:String = File.applicationStorageDirectory.resolvePath("assets/template/"+devicesFolder+configPro.coding+swfURL).url;
-			var pathURL:String = File.applicationStorageDirectory.resolvePath("assets/template/"+devicesFolder+configPro.coding+swfPath).url;
-			if(configPro.role == SetRoleMode.SERVER)
-			{
-				ip = null;
 				if(!this.facade.hasProxy(ServerSocketProxy.NAME))
 					this.facade.registerProxy(new ServerSocketProxy());
 				var serverSocket:ServerSocketProxy = this.facade.retrieveProxy(ServerSocketProxy.NAME) as ServerSocketProxy;
@@ -66,6 +39,7 @@ package controller
 					this.facade.registerProxy(new AnalyzeServerDataProxy());
 				var analyzeServerData:AnalyzeServerDataProxy = this.facade.retrieveProxy(AnalyzeServerDataProxy.NAME) as AnalyzeServerDataProxy;
 				analyzeServerData.path = configPro.projectPath+"/"+configPro.projectName+"/";
+				
 				if(!this.facade.hasCommand(SystemFacade.ANALYZE_SERVER_DATA))
 					this.facade.registerCommand(SystemFacade.ANALYZE_SERVER_DATA,AnalyzeServerDataCmd);
 				
@@ -86,13 +60,13 @@ package controller
 			}
 			else
 			{
-				ip = configPro.ip;
+				var ip:String = configPro.ip;
 				if(!this.facade.hasProxy(SocketProxy.NAME))
 					this.facade.registerProxy(new SocketProxy());
 				var socketPro:SocketProxy = this.facade.retrieveProxy(SocketProxy.NAME) as SocketProxy;
 				socketPro.start(ip);
 			}
-			moduleMainMe.renderMasterFile(pathURL,url,configPro.terminal,configPro.direction,configPro.picList);
+			moduleMainMe.renderMasterFile(pathURL,swfURL,configPro.terminal,configPro.direction,configPro.picList);
 		}
 	}
 }

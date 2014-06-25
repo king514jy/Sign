@@ -14,11 +14,7 @@ package controller
 		override public function execute(notification:INotification):void
 		{
 			var configProxy:ConfigProxy = this.facade.retrieveProxy(ConfigProxy.NAME) as ConfigProxy;
-			var obj:Object = notification.getBody();
-			if(obj)
-				configProxy.loadConfig(obj.isSet);
-			else
-				configProxy.loadConfig();
+			configProxy.loadConfig();
 		}
 	}
 }

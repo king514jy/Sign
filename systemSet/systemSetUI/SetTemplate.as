@@ -33,7 +33,6 @@
 			selectBtn = this.getChildByName("select_btn") as SimpleButton;
 			this.mask = mask_mc;
 			codingList = new Vector.<String>();
-			hasConfigList = new Vector.<Boolean>();
 			nextBtn.addEventListener(MouseEvent.CLICK,clickChange);
 			preBtn.addEventListener(MouseEvent.CLICK,clickChange);
 			selectBtn.addEventListener(MouseEvent.CLICK,selectTemplate);
@@ -43,10 +42,6 @@
 			if(str!=_comfigAddress)
 			{
 				_comfigAddress = str;
-				if(str.search("signle")!=-1)
-					titleTxt.text = "以下系列为单屏使用模板，若为多屏，请返回设置";
-				else
-					titleTxt.text = "以下系列为多屏使用模板，若为单屏，请返回设置";
 				setSelf();
 			}
 		}
@@ -66,7 +61,6 @@
 			for(var i:int=0;i<le;i++)
 			{
 				codingList.push(xml.template[i].@coding);
-				hasConfigList.push(xml.template[i].@config=="true");
 			}
 			urlLoader.removeEventListener(Event.COMPLETE,loadComplete);
 			urlLoader = null;
@@ -139,10 +133,7 @@
 		private function selectTemplate(e:MouseEvent):void
 		{
 			value = codingList[count];
-			if(hasConfigList[count])
-				goto = 7;
-			else
-				goto = 999;
+			goto = 999;
 			dispatchEvent(new Event("goto"));
 		}
 		override public function setValue(str:String):void

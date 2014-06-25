@@ -13,10 +13,6 @@ package systemSetUI.events
 		 */
 		public static const SET_CURRENT_MODULE = "set_current_module";
 		/**
-		 * 抽奖设置
-		 */
-		public static const SET_LOTTERY:String = "set_lottery";
-		/**
 		 * 安装模块
 		 */
 		public static const INSTALL_MODULE:String = "install_module";
@@ -24,10 +20,6 @@ package systemSetUI.events
 		 * 卸载模块
 		 */
 		public static const UNINSTALL_MODULE:String = "uninstall_module";
-		/**
-		 * 打开抽奖控制
-		 */
-		public static const OPEN_LOTTERY:String = "open_lottery";
 		/**
 		 * 修改密码
 		 */

@@ -1,6 +1,6 @@
 ﻿package systemSetUI
 {
-	import com.kingclass.events.MenuClickEvent;
+	import ky.events.MenuClickEvent;
 	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;

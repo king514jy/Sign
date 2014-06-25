@@ -1,6 +1,6 @@
-package systemSetUI.cfg.components 
+﻿package systemSetUI.cfg.components 
 {
-	import com.kingclass.utils.ScaleBitmap;
+	import ky.utils.ScaleBitmap;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;

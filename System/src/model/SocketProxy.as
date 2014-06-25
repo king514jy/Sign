@@ -10,7 +10,6 @@ package model
 	import org.puremvc.as3.interfaces.IProxy;
 	import org.puremvc.as3.patterns.proxy.Proxy;
 	
-	import view.conmponents.AppRoot;
 	
 	public class SocketProxy extends Proxy implements IProxy
 	{
@@ -18,20 +17,13 @@ package model
 		private var _ip:String;
 		private var socket:Socket;
 		private var objList:Vector.<Object>;
-		private var appRoot:AppRoot;
-		public var openDebug:Boolean;
 		public function SocketProxy(data:Object=null)
 		{
 			super(NAME, data);
 			objList = new Vector.<Object>();
-			appRoot = AppRoot.getInstance();
 		}
 		public function start(ip:String):void
 		{
-			if(openDebug)
-			{
-				appRoot.addDebugInfo("建立连接--");
-			}
 			_ip = ip;
 			if(socket)
 			{
@@ -55,8 +47,7 @@ package model
 		}
 		private function closeConnect(e:Event):void
 		{
-			if(openDebug)
-				appRoot.addDebugInfo("连接断开--");
+			
 		}
 		private function handleData(e:Event = null):void
 		{
@@ -68,18 +59,14 @@ package model
 		private function ioError(e:IOErrorEvent):void
 		{
 			//trace("连接错误")
-			if(openDebug)
-				appRoot.addDebugInfo("连接错误--");
+			
 		}
 		private function securityError(e:SecurityErrorEvent):void
 		{
-			if(openDebug)
-				appRoot.addDebugInfo("安全错误--");
+			
 		}
 		public function send(obj:Object):void
 		{
-			if(openDebug)
-				appRoot.addDebugInfo("准备发送--");
 			if(socket.connected)
 			{
 				sendBegin(obj);
@@ -88,13 +75,10 @@ package model
 			{
 				objList.push(obj);
 				start(_ip);
-				
 			}
 		}
 		private function sendBegin(obj:Object):void
 		{
-			if(openDebug)
-				appRoot.addDebugInfo("发送信息--");
 			var objByte:ByteArray = new ByteArray();
 			objByte.writeObject(obj); 
 			objByte.compress();

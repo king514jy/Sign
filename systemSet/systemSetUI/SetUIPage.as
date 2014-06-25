@@ -4,48 +4,40 @@
 	import com.greensock.easing.Quint;
 	
 	import flash.display.SimpleButton;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import signUi.mode.SetDevicesMode;
-	import signUi.mode.SetRoleMode;
 	
 	import systemSetUI.cfg.SetModlueConfig;
 	import systemSetUI.events.SystemSetEvent;
 	
-	public class SetUIPage extends SetUIBase
+	public class SetUIPage extends Sprite
 	{
 		private var queueList:Vector.<SetBase>;
 		private var endX:uint = 512;
 		private var startX:uint = 630;
 		private var closeX:uint = 395;
 		private var setProject:SetProject;
-		private var setDevices:SetDevices;
 		private var setDirection:SetDirection;
 		private var setTerminal:SetTerminal;
-		private var setRole:SetRole;
 		private var setIP:SetIP;
 		private var setTemplate:SetTemplate;
 		private var nowUI:SetBase;
 		private var oldIDList:Vector.<int>;
 		private var backBtn:SimpleButton;
-		private var templateCfgList:Vector.<String>;
-		private var setConfig:SetModlueConfig;
+		private var templateListURL:String;
 		public var storageDirectory:String;
-		public function SetUIPage(signle:String,multi:String)
+		public function SetUIPage(templateListURL:String)
 		{
-			templateCfgList = new Vector.<String>();
-			templateCfgList.push(signle,multi);
+			this.templateListURL = templateListURL;
 			queueList = new Vector.<SetBase>();
 			setProject = new SetProject();
-			setDevices = new SetDevices();
 			setDirection = new SetDirection();
 			setTerminal = new SetTerminal();
-			setRole = new SetRole();
 			setIP = new SetIP();
 			setTemplate = new SetTemplate();
-			setConfig = new SetModlueConfig();
-			queueList.push(setProject,setDevices,setDirection,setTerminal,setRole,setIP,setTemplate,setConfig);
+			queueList.push(setProject,setDirection,setTerminal,setIP,setTemplate);
 			for each(var sb:SetBase in queueList)
 			{
 				sb.addEventListener("goto",changeUI);
@@ -59,14 +51,10 @@
 		public function get projectName():String{ return setProject.projectName; }
 		public function set projectPath(str:String):void{ setProject.projectPath = str; }
 		public function get projectPath():String{ return setProject.projectPath;}
-		public function set devices(str:String):void{ setDevices.setValue(str); }
-		public function get devices():String{ return setDevices.value; }
 		public function set direction(str:String):void{ setDirection.setValue(str); }
 		public function get direction():String{ return setDirection.value; }
 		public function set terminal(str:String):void{ setTerminal.setValue(str); }
 		public function get terminal():String{ return setTerminal.value; }
-		public function set role(str:String):void{ setRole.setValue(str); }
-		public function get role():String{ return setRole.value; }
 		public function set ip(str:String):void{ setIP.setValue(str); }
 		public function get ip():String{ return setIP.value; }
 		public function set template(str:String):void{ setTemplate.setValue(str); }
@@ -101,27 +89,9 @@
 			var sb:SetBase = e.target as SetBase;
 			if(sb.goto!=999)
 			{
-				if(sb.goto==6)
+				if(sb.goto==4)
 				{
-					setTemplate.comfigAddress = templateCfgList[int(setDevices.value)-1];
-				}
-				if(sb.goto==7)
-				{
-					if(setDevices.value == SetDevicesMode.SIGNLE)
-					{
-						
-					}
-					else
-					{
-						if(setRole.value == SetRoleMode.CLIENT)
-						{
-							setConfig.configAddress = storageDirectory+"assets/template/multi/"+setTemplate.value+"/signUI/config.xml";
-						}
-						else
-						{
-							setConfig.configAddress = storageDirectory+"assets/template/multi/"+setTemplate.value+"/signShowUI/config.xml";
-						}
-					}
+					setTemplate.comfigAddress = templateListURL;
 				}
 				openUI(queueList[sb.goto]);
 				closeUI();
@@ -146,7 +116,6 @@
 			if(oldIDList.length<1)
 				backBtn.visible = false;
 		}
-
 	}
 	
 }

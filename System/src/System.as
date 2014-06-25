@@ -22,8 +22,8 @@ package
 			
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			stage.displayState = StageDisplayState.FULL_SCREEN;
-			Mouse.hide();
+			//stage.displayState = StageDisplayState.FULL_SCREEN;
+			//Mouse.hide();
 			appRoot = AppRoot.getInstance();
 			appRoot.root = this;
 			appRoot.stageW = stage.stageWidth;

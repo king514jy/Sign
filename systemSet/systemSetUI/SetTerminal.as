@@ -2,7 +2,7 @@
 {
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import signUi.mode.SetTerminalMode;
+	import ky.mode.SetTerminalMode;
 	import flash.events.MouseEvent;
 	
 	public class SetTerminal extends SetBase
@@ -16,7 +16,10 @@
 		override protected function clickHandle(e:MouseEvent):void
 		{
 			super.clickHandle(e);
-			goto = 4;
+			if(value == SetTerminalMode.DISPLAY)
+				goto = 4;
+			else
+				goto = 3;
 			dispatchEvent(new Event("goto"));
 		}
 
